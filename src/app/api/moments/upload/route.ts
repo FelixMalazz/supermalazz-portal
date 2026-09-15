@@ -43,10 +43,18 @@ export async function POST(request: NextRequest) {
     const authorAvatar = user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
     const authorRole = (user?.role as any) || 'CHEF';
 
-    // Ensure local public/uploads/moments directory exists (for local development)
+    // Check storage mode: Vercel Blob > Base64 fallback (on serverless) > Local filesystem
+    const hasBlobToken = Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+    const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'moments');
-    if (!process.env.BLOB_READ_WRITE_TOKEN) {
-      await fs.mkdir(uploadDir, { recursive: true });
+
+    // Only attempt local filesystem write when running locally (not serverless) and no blob token
+    if (!hasBlobToken && !isServerless) {
+      try {
+        await fs.mkdir(uploadDir, { recursive: true });
+      } catch (err) {
+        console.warn('Local upload dir creation skipped:', err);
+      }
     }
 
     const createdMoments = [];
@@ -61,19 +69,34 @@ export async function POST(request: NextRequest) {
       const uniqueFilename = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${cleanBase}${ext}`;
 
       let imageUrl = '';
-      if (process.env.BLOB_READ_WRITE_TOKEN) {
-        // Upload to Vercel Blob cloud storage
+      if (hasBlobToken) {
+        // 1. Upload to Vercel Blob cloud storage
         const blob = await put(`moments/${uniqueFilename}`, file, {
           access: 'public',
         });
         imageUrl = blob.url;
-      } else {
-        // Write file buffer to local disk
-        const filePath = path.join(uploadDir, uniqueFilename);
+      } else if (isServerless) {
+        // 2. Serverless fallback (Vercel read-only filesystem): encode to Base64 Data URI
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        await fs.writeFile(filePath, buffer);
-        imageUrl = `/uploads/moments/${uniqueFilename}`;
+        const mimeType = file.type || 'image/jpeg';
+        imageUrl = `data:${mimeType};base64,${buffer.toString('base64')}`;
+      } else {
+        // 3. Local development: Write file buffer to local disk
+        try {
+          const filePath = path.join(uploadDir, uniqueFilename);
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          await fs.writeFile(filePath, buffer);
+          imageUrl = `/uploads/moments/${uniqueFilename}`;
+        } catch (diskErr) {
+          // If local disk write fails for any reason, fallback to data URI
+          console.warn('Local disk write failed, falling back to base64:', diskErr);
+          const bytes = await file.arrayBuffer();
+          const buffer = Buffer.from(bytes);
+          const mimeType = file.type || 'image/jpeg';
+          imageUrl = `data:${mimeType};base64,${buffer.toString('base64')}`;
+        }
       }
 
       // Metadata for this specific file
