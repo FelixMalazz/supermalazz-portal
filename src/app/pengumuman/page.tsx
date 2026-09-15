@@ -55,6 +55,7 @@ export default async function PengumumanPage() {
       <AnnouncementFeedClient
         initialAnnouncements={announcements}
         isChef={isChef}
+        currentUser={user}
       />
 
     </div>

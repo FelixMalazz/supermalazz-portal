@@ -19,13 +19,19 @@ import {
   Coffee,
   CheckCircle2,
   Clock,
+  MessageSquare,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
-import { AnnouncementItem, AnnouncementCategory } from '@/lib/types';
+import { AnnouncementItem, AnnouncementCategory, UserSession } from '@/lib/types';
 import AnnouncementModal from './AnnouncementModal';
+import ReactionPicker from './ReactionPicker';
+import CommentSection from './CommentSection';
 
 interface AnnouncementFeedClientProps {
   initialAnnouncements: AnnouncementItem[];
   isChef: boolean;
+  currentUser?: UserSession | null;
 }
 
 const CATEGORY_CONFIG: Record<
@@ -76,11 +82,25 @@ const CATEGORY_CONFIG: Record<
 export default function AnnouncementFeedClient({
   initialAnnouncements,
   isChef,
+  currentUser,
 }: AnnouncementFeedClientProps) {
   const router = useRouter();
   const [announcements, setAnnouncements] = useState<AnnouncementItem[]>(initialAnnouncements);
   const [selectedCategory, setSelectedCategory] = useState<'ALL' | AnnouncementCategory>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set());
+
+  const toggleComments = (id: string) => {
+    setExpandedComments((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   // Modal State for Create / Edit
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -434,12 +454,65 @@ export default function AnnouncementFeedClient({
                 </h2>
 
                 {/* Content */}
-                <div className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium mb-6">
+                <div className="text-sm sm:text-base text-slate-800 leading-relaxed font-medium mb-5">
                   {renderFormattedContent(item.content)}
                 </div>
 
+                {/* Community Bar: Reactions & Comment Toggle */}
+                <div className="pt-3 pb-3 border-t-2 border-slate-100 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <ReactionPicker
+                      targetId={item.id}
+                      targetType="announcement"
+                      initialReactions={item.reactions || []}
+                      currentUserId={currentUser?.id}
+                      onReactionChange={(updatedReactions) => {
+                        setAnnouncements((prev) =>
+                          prev.map((a) => (a.id === item.id ? { ...a, reactions: updatedReactions } : a))
+                        );
+                      }}
+                      size="sm"
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => toggleComments(item.id)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border-2 border-[#0A1128] text-xs font-black transition-all cursor-pointer shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] ${
+                      expandedComments.has(item.id)
+                        ? 'bg-[#0A1128] text-white'
+                        : 'bg-white text-[#0A1128] hover:bg-slate-50'
+                    }`}
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>Komentar ({item.comments?.length || 0})</span>
+                    {expandedComments.has(item.id) ? (
+                      <ChevronUp className="w-3.5 h-3.5" />
+                    ) : (
+                      <ChevronDown className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Expandable Comments Drawer */}
+                {expandedComments.has(item.id) && (
+                  <div className="my-4 p-4 bg-slate-50 border-2 border-[#0A1128] rounded-xl shadow-[3px_3px_0px_#0A1128] animate-in fade-in duration-200">
+                    <CommentSection
+                      targetId={item.id}
+                      targetType="announcement"
+                      initialComments={item.comments || []}
+                      currentUser={currentUser}
+                      onCommentsChange={(updatedComments) => {
+                        setAnnouncements((prev) =>
+                          prev.map((a) => (a.id === item.id ? { ...a, comments: updatedComments } : a))
+                        );
+                      }}
+                    />
+                  </div>
+                )}
+
                 {/* Bottom Row: Author & Timestamp */}
-                <div className="flex items-center justify-between pt-4 border-t-2 border-slate-100 flex-wrap gap-3">
+                <div className="flex items-center justify-between pt-3 border-t-2 border-slate-100 flex-wrap gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl border-2 border-[#0A1128] overflow-hidden bg-slate-100 shrink-0 shadow-[2px_2px_0px_#0A1128]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}

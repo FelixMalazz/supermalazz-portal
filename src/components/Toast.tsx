@@ -6,10 +6,10 @@ import { CheckCircle2, AlertCircle, Info, Sparkles, X } from 'lucide-react';
 export interface ToastMessage {
   id: string;
   message: string;
-  type?: 'success' | 'info' | 'error';
+  type?: 'success' | 'info' | 'error' | 'warning';
 }
 
-export function showToast(message: string, type: 'success' | 'info' | 'error' = 'success') {
+export function showToast(message: string, type: 'success' | 'info' | 'error' | 'warning' = 'success') {
   if (typeof window !== 'undefined') {
     window.dispatchEvent(
       new CustomEvent('supermalazz-toast', {

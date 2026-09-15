@@ -1,5 +1,6 @@
 import { prisma } from './prisma';
-import { AnnouncementItem, AnnouncementCategory, UserRole } from './types';
+import { AnnouncementItem, AnnouncementCategory, UserRole, CommentItem, ReactionGroup } from './types';
+import { groupReactions } from './gallery';
 
 // In-memory fallback dataset
 let inMemoryAnnouncements: AnnouncementItem[] = [];
@@ -13,6 +14,11 @@ export async function getAnnouncements(): Promise<{ announcements: AnnouncementI
       ],
       include: {
         author: true,
+        comments: {
+          include: { author: true },
+          orderBy: { createdAt: 'asc' },
+        },
+        reactions: true,
       },
     });
 
@@ -30,6 +36,19 @@ export async function getAnnouncements(): Promise<{ announcements: AnnouncementI
           role: (a.author?.role as UserRole) || 'CHEF',
           avatar: a.author?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150',
         },
+        comments: (a.comments || []).map((c: any) => ({
+          id: c.id,
+          content: c.content,
+          authorId: c.authorId,
+          author: {
+            username: c.author?.username || 'Warga',
+            displayName: c.author?.displayName || null,
+            avatar: c.author?.avatar || null,
+            role: (c.author?.role as UserRole) || 'MALAZZ',
+          },
+          createdAt: c.createdAt.toISOString(),
+        })),
+        reactions: groupReactions(a.reactions || []),
         createdAt: a.createdAt.toISOString(),
         updatedAt: a.updatedAt ? a.updatedAt.toISOString() : undefined,
       })),
@@ -203,3 +222,126 @@ export async function deleteAnnouncement(id: string): Promise<boolean> {
 export async function togglePinAnnouncement(id: string, isPinned: boolean): Promise<AnnouncementItem | null> {
   return updateAnnouncement(id, { isPinned });
 }
+
+export async function addAnnouncementComment(
+  announcementId: string,
+  author: { id: string; username: string; displayName?: string | null; avatar?: string | null; role: UserRole },
+  content: string
+): Promise<CommentItem> {
+  // Ensure author exists in DB
+  await prisma.user.upsert({
+    where: { id: author.id },
+    update: {
+      username: author.username,
+      displayName: author.displayName || author.username,
+      avatar: author.avatar || null,
+      role: author.role,
+    },
+    create: {
+      id: author.id,
+      username: author.username,
+      displayName: author.displayName || author.username,
+      avatar: author.avatar || null,
+      role: author.role,
+    },
+  });
+
+  const comment = await prisma.announcementComment.create({
+    data: {
+      content,
+      announcementId,
+      authorId: author.id,
+    },
+    include: { author: true },
+  });
+
+  return {
+    id: comment.id,
+    content: comment.content,
+    authorId: comment.authorId,
+    author: {
+      username: comment.author.username,
+      displayName: comment.author.displayName,
+      avatar: comment.author.avatar,
+      role: (comment.author.role as UserRole) || 'MALAZZ',
+    },
+    createdAt: comment.createdAt.toISOString(),
+  };
+}
+
+export async function deleteAnnouncementComment(
+  commentId: string,
+  userId: string,
+  role: string
+): Promise<boolean> {
+  const comment = await prisma.announcementComment.findUnique({
+    where: { id: commentId },
+  });
+  if (!comment) return false;
+  if (comment.authorId !== userId && role !== 'CHEF') {
+    throw new Error('Hanya pembuat komentar atau Chef yang dapat menghapus komentar.');
+  }
+  await prisma.announcementComment.delete({ where: { id: commentId } });
+  return true;
+}
+
+export async function toggleAnnouncementReaction(
+  announcementId: string,
+  user: { id: string; username: string; displayName?: string | null; avatar?: string | null; role: UserRole },
+  emoji: string
+): Promise<{ added: boolean; reactions: ReactionGroup[] }> {
+  // Ensure author exists in DB
+  await prisma.user.upsert({
+    where: { id: user.id },
+    update: {
+      username: user.username,
+      displayName: user.displayName || user.username,
+      avatar: user.avatar || null,
+      role: user.role,
+    },
+    create: {
+      id: user.id,
+      username: user.username,
+      displayName: user.displayName || user.username,
+      avatar: user.avatar || null,
+      role: user.role,
+    },
+  });
+
+  const existing = await prisma.announcementReaction.findUnique({
+    where: {
+      announcementId_userId_emoji: {
+        announcementId,
+        userId: user.id,
+        emoji,
+      },
+    },
+  });
+
+  let added = false;
+  if (existing) {
+    await prisma.announcementReaction.delete({
+      where: { id: existing.id },
+    });
+    added = false;
+  } else {
+    await prisma.announcementReaction.create({
+      data: {
+        announcementId,
+        userId: user.id,
+        emoji,
+      },
+    });
+    added = true;
+  }
+
+  const allReactions = await prisma.announcementReaction.findMany({
+    where: { announcementId },
+  });
+
+  return {
+    added,
+    reactions: groupReactions(allReactions),
+  };
+}
+

@@ -4,9 +4,12 @@ import { getMoments } from '@/lib/gallery';
 import GalleryViewer from '@/components/GalleryViewer';
 import AddMomentModal from '@/components/AddMomentModal';
 
+import { getCurrentUser } from '@/lib/auth';
+
 export const dynamic = 'force-dynamic';
 
 export default async function GaleriPage() {
+  const user = await getCurrentUser();
   const moments = await getMoments();
   const canAdd = true;
 
@@ -45,7 +48,7 @@ export default async function GaleriPage() {
       </div>
 
       {/* Gallery Viewer */}
-      <GalleryViewer initialMoments={moments} />
+      <GalleryViewer initialMoments={moments} currentUser={user} />
 
     </div>
   );

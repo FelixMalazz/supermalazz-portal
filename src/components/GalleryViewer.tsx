@@ -15,16 +15,21 @@ import {
   AlertTriangle, 
   Image as ImageIcon,
   Search,
-  ArrowUpDown
+  ArrowUpDown,
+  MessageSquare
 } from 'lucide-react';
 import { MomentItem } from '@/lib/gallery';
+import { UserSession } from '@/lib/types';
 import { showToast } from '@/components/Toast';
+import ReactionPicker from './ReactionPicker';
+import CommentSection from './CommentSection';
 
 interface GalleryViewerProps {
   initialMoments: MomentItem[];
+  currentUser?: UserSession | null;
 }
 
-export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
+export default function GalleryViewer({ initialMoments, currentUser }: GalleryViewerProps) {
   const router = useRouter();
   const [moments, setMoments] = useState<MomentItem[]>(initialMoments);
   const [filter, setFilter] = useState<'ALL' | 'MABAR' | 'CHAOS' | 'VOICE' | 'TOURNAMENT'>('ALL');
@@ -369,7 +374,7 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
                     </span>
                   </div>
 
-                  {/* Actions: Like & Delete */}
+                  {/* Actions: Like, Comment count & Delete */}
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => handleLike(item.id, e)}
@@ -384,6 +389,15 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
                       />
                       <span>{item.likes}</span>
                     </button>
+
+                    {/* Comment Count indicator */}
+                    <div
+                      title={`${item.comments?.length || 0} Komentar`}
+                      className="flex items-center gap-1 px-2 py-1 rounded-lg border-2 border-[#0A1128] bg-slate-50 text-slate-700 text-xs font-black shadow-[1px_1px_0px_#0A1128]"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5 text-slate-500" />
+                      <span>{item.comments?.length || 0}</span>
+                    </div>
 
                     {/* Delete Button */}
                     <button
@@ -409,15 +423,15 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
       {/* Lightbox Modal */}
       {selectedMoment && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/80 backdrop-blur-sm animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/80 backdrop-blur-sm animate-in fade-in duration-150 overflow-y-auto"
           onClick={() => setSelectedMoment(null)}
         >
           <div
-            className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] overflow-hidden"
+            className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] overflow-hidden my-8 max-h-[92vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Image */}
-            <div className="relative aspect-video w-full bg-slate-950 border-b-3 border-[#0A1128]">
+            <div className="relative aspect-video w-full bg-slate-950 border-b-3 border-[#0A1128] shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={selectedMoment.imageUrl}
@@ -432,9 +446,9 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
               </button>
             </div>
 
-            {/* Modal Details */}
-            <div className="p-6">
-              <div className="flex items-center justify-between gap-4 mb-3 flex-wrap">
+            {/* Modal Details (Scrollable) */}
+            <div className="p-6 overflow-y-auto space-y-5">
+              <div className="flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-2 flex-wrap">
                   {getCategoryBadge(selectedMoment.category)}
                   
@@ -469,18 +483,19 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-black text-[#0A1128] mb-2 leading-snug">
-                {selectedMoment.title}
-              </h2>
+              <div>
+                <h2 className="text-2xl font-black text-[#0A1128] mb-1 leading-snug">
+                  {selectedMoment.title}
+                </h2>
+                {selectedMoment.description && (
+                  <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                    {selectedMoment.description}
+                  </p>
+                )}
+              </div>
 
-              {selectedMoment.description && (
-                <p className="text-sm text-slate-700 font-medium leading-relaxed mb-4">
-                  {selectedMoment.description}
-                </p>
-              )}
-
-              <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                {/* Delete in modal */}
+              {/* Action Buttons: Like & Delete */}
+              <div className="flex items-center justify-between pt-2">
                 <button
                   onClick={() => setDeletingMoment(selectedMoment)}
                   className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 border-2 border-[#0A1128] rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
@@ -489,7 +504,6 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
                   <span>Hapus Momen</span>
                 </button>
 
-                {/* Like Button */}
                 <button
                   onClick={(e) => handleLike(selectedMoment.id, e)}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-[#E31B23] border-2 border-[#0A1128] rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
@@ -498,6 +512,47 @@ export default function GalleryViewer({ initialMoments }: GalleryViewerProps) {
                   <span>Suka Momen Ini ({selectedMoment.likes})</span>
                 </button>
               </div>
+
+              {/* Reaction Bar */}
+              <div className="p-3 bg-slate-50 border-2 border-[#0A1128] rounded-xl space-y-2 shadow-[2px_2px_0px_#0A1128]">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-black uppercase text-[#0A1128] tracking-wider">
+                    Reaksi Warga:
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400">
+                    Klik emoji untuk memberi / menghapus reaksi
+                  </span>
+                </div>
+                <ReactionPicker
+                  targetId={selectedMoment.id}
+                  targetType="moment"
+                  initialReactions={selectedMoment.reactions || []}
+                  currentUserId={currentUser?.id}
+                  onReactionChange={(updatedReactions) => {
+                    setSelectedMoment((prev) => prev ? { ...prev, reactions: updatedReactions } : null);
+                    setMoments((prev) =>
+                      prev.map((m) => (m.id === selectedMoment.id ? { ...m, reactions: updatedReactions } : m))
+                    );
+                  }}
+                />
+              </div>
+
+              {/* Comments Section */}
+              <div className="border-t-2 border-slate-100 pt-4">
+                <CommentSection
+                  targetId={selectedMoment.id}
+                  targetType="moment"
+                  initialComments={selectedMoment.comments || []}
+                  currentUser={currentUser}
+                  onCommentsChange={(updatedComments) => {
+                    setSelectedMoment((prev) => prev ? { ...prev, comments: updatedComments } : null);
+                    setMoments((prev) =>
+                      prev.map((m) => (m.id === selectedMoment.id ? { ...m, comments: updatedComments } : m))
+                    );
+                  }}
+                />
+              </div>
+
             </div>
 
           </div>
