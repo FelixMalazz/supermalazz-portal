@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary-red: #E31B23;
+  --color-primary-red-hover: #c41219;
+  --color-deep-navy: #0A1128;
+  --color-canvas-bg: #F8FAFC;
+  --color-accent-gold: #F59E0B;
+  --color-muted-gray: #64748B;
+  --color-card-bg: #FFFFFF;
+
+  --font-sans: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --shadow-brutal-sm: 2px 2px 0px #0A1128;
+  --shadow-brutal: 4px 4px 0px #0A1128;
+  --shadow-brutal-lg: 6px 6px 0px #0A1128;
+  --shadow-brutal-red: 4px 4px 0px #E31B23;
+  --shadow-brutal-gold: 4px 4px 0px #F59E0B;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #F8FAFC;
+  --foreground: #0A1128;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Neo-Brutalism Utility Classes */
+.brutal-border {
+  border: 2px solid #0A1128;
+}
+
+.brutal-border-thick {
+  border: 3px solid #0A1128;
+}
+
+.brutal-shadow {
+  box-shadow: 4px 4px 0px #0A1128;
+}
+
+.brutal-shadow-sm {
+  box-shadow: 2px 2px 0px #0A1128;
+}
+
+.brutal-shadow-lg {
+  box-shadow: 6px 6px 0px #0A1128;
+}
+
+.brutal-shadow-red {
+  box-shadow: 4px 4px 0px #E31B23;
+}
+
+.brutal-shadow-gold {
+  box-shadow: 4px 4px 0px #F59E0B;
+}
+
+.brutal-btn {
+  border: 2px solid #0A1128;
+  box-shadow: 4px 4px 0px #0A1128;
+  transition: all 0.15s ease-in-out;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #0A1128;
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #0A1128;
+}
+
+.brutal-card {
+  border: 2px solid #0A1128;
+  box-shadow: 4px 4px 0px #0A1128;
+  background-color: #FFFFFF;
+  border-radius: 0.75rem;
+}
+
+/* Subtle grid pattern */
+.bg-grid-pattern {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(10, 17, 40, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 17, 40, 0.05) 1px, transparent 1px);
 }

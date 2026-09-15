@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  CHEF
+  SIRKEL
+  MALAZZ
+}
+
+model User {
+  id               String         @id // Discord Snowflake ID or unique id
+  username         String
+  displayName      String?
+  avatar           String?
+  role             UserRole       @default(MALAZZ)
+  joinedGuildAt    DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  announcements    Announcement[]
+  moments          Moment[]
+
+  @@map("users")
+}
+
+model Announcement {
+  id        String   @id @default(uuid())
+  title     String
+  content   String   @db.Text
+  category  String   @default("PENTING") // PENTING, TURNAMEN, UPDATE, SANTAI
+  isPinned  Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isPinned, createdAt(sort: Desc)])
+  @@map("announcements")
+}
+
+model Moment {
+  id          String   @id @default(uuid())
+  title       String
+  description String?  @db.Text
+  imageUrl    String
+  category    String   @default("MABAR") // MABAR, CHAOS, VOICE, TOURNAMENT
+  likes       Int      @default(0)
+  authorId    String
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  capturedAt  DateTime? // Tanggal foto diambil dari metadata file
+  createdAt   DateTime  @default(now())
+
+  @@index([createdAt(sort: Desc)])
+  @@index([capturedAt(sort: Desc)])
+  @@map("moments")
+}
