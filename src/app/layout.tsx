@@ -19,7 +19,10 @@ export const metadata: Metadata = {
   description:
     'Platform terpadu komunitas tongkrongan online SuperMalazz. Portal Discord, info hirarki peran CHEF, SIRKEL, MALAZZ, dan pengumuman komunitas.',
   icons: {
-    icon: '/logo.png',
+    icon: [
+      { url: '/logo.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
     shortcut: '/logo.png',
     apple: '/logo.png',
   },
