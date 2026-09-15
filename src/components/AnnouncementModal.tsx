@@ -131,10 +131,10 @@ export default function AnnouncementModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/75 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-2xl shadow-[8px_8px_0px_#0A1128] overflow-hidden animate-in fade-in zoom-in-95 duration-150 my-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/75 dark:bg-black/80 backdrop-blur-xs overflow-y-auto">
+      <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl w-full max-w-2xl shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] overflow-hidden animate-in fade-in zoom-in-95 duration-150 my-8">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 bg-[#0A1128] text-white">
+        <div className="flex items-center justify-between px-6 py-4 bg-[#0A1128] dark:bg-slate-950 text-white border-b-2 border-[#0A1128] dark:border-slate-800">
           <div className="flex items-center gap-2.5">
             <div className="p-1.5 bg-[#F59E0B] rounded-lg text-[#0A1128] font-black">
               <Sparkles className="w-4 h-4" />
@@ -148,6 +148,7 @@ export default function AnnouncementModal({
               </p>
             </div>
           </div>
+
           <button
             onClick={onClose}
             className="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer border border-transparent hover:border-slate-600"
@@ -159,7 +160,7 @@ export default function AnnouncementModal({
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {errorMsg && (
-            <div className="flex items-center gap-2.5 p-3.5 bg-red-50 border-2 border-red-500 text-red-700 text-xs font-bold rounded-xl shadow-[2px_2px_0px_#EF4444]">
+            <div className="flex items-center gap-2.5 p-3.5 bg-red-50 dark:bg-red-950/50 border-2 border-red-500 dark:border-red-900 text-red-700 dark:text-red-400 text-xs font-bold rounded-xl shadow-[2px_2px_0px_#EF4444]">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errorMsg}</span>
             </div>
@@ -167,7 +168,7 @@ export default function AnnouncementModal({
 
           {/* Title */}
           <div>
-            <label className="block text-xs font-black uppercase text-[#0A1128] mb-1.5 tracking-wider">
+            <label className="block text-xs font-black uppercase text-[#0A1128] dark:text-white mb-1.5 tracking-wider">
               Judul Pengumuman
             </label>
             <input
@@ -175,14 +176,14 @@ export default function AnnouncementModal({
               placeholder="Contoh: Jadwal Turnamen Valorant & Maintenance Voice Server"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2.5 bg-white border-2 border-[#0A1128] rounded-xl text-sm font-bold text-[#0A1128] placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#F59E0B] shadow-[2px_2px_0px_#0A1128]"
+              className="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-sm font-bold text-[#0A1128] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-[#F59E0B] shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]"
               required
             />
           </div>
 
           {/* Category Selector (Opsi 2) */}
           <div>
-            <label className="block text-xs font-black uppercase text-[#0A1128] mb-2 tracking-wider">
+            <label className="block text-xs font-black uppercase text-[#0A1128] dark:text-white mb-2 tracking-wider">
               Kategori Pengumuman
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -196,8 +197,8 @@ export default function AnnouncementModal({
                     onClick={() => setCategory(cat.id)}
                     className={`flex items-start gap-3 p-3 text-left rounded-xl border-2 transition-all cursor-pointer ${
                       isSelected
-                        ? 'border-[#0A1128] bg-[#FFFBEB] shadow-[3px_3px_0px_#0A1128] ring-2 ring-[#0A1128]'
-                        : 'border-slate-200 bg-slate-50 hover:bg-white hover:border-[#0A1128]'
+                        ? 'border-[#0A1128] dark:border-slate-600 bg-[#FFFBEB] dark:bg-amber-950/50 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] ring-2 ring-[#0A1128] dark:ring-amber-500'
+                        : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-white dark:hover:bg-slate-700 hover:border-[#0A1128]'
                     }`}
                   >
                     <div
@@ -207,16 +208,16 @@ export default function AnnouncementModal({
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-[#0A1128]">
+                        <span className="text-xs font-black text-[#0A1128] dark:text-white">
                           {cat.name}
                         </span>
                         {isSelected && (
-                          <div className="w-4 h-4 rounded-full bg-[#0A1128] text-white flex items-center justify-center text-[10px]">
+                          <div className="w-4 h-4 rounded-full bg-[#0A1128] dark:bg-white text-white dark:text-[#0A1128] flex items-center justify-center text-[10px]">
                             <Check className="w-2.5 h-2.5" />
                           </div>
                         )}
                       </div>
-                      <p className="text-[11px] text-slate-500 font-medium leading-snug mt-0.5 line-clamp-2">
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-snug mt-0.5 line-clamp-2">
                         {cat.desc}
                       </p>
                     </div>
@@ -229,10 +230,10 @@ export default function AnnouncementModal({
           {/* Content */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-black uppercase text-[#0A1128] tracking-wider">
+              <label className="text-xs font-black uppercase text-[#0A1128] dark:text-white tracking-wider">
                 Isi Pengumuman
               </label>
-              <span className="text-[11px] font-semibold text-slate-500">
+              <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
                 Mendukung paragraf baris baru & penekanan kata
               </span>
             </div>
@@ -241,13 +242,13 @@ export default function AnnouncementModal({
               placeholder="Tuliskan rincian pengumuman secara jelas di sini... Contoh: waktu pelaksanaan, link pendaftaran, atau arahan khusus bagi warga tongkrongan."
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="w-full px-4 py-3 bg-white border-2 border-[#0A1128] rounded-xl text-sm font-medium text-[#0A1128] placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-[#F59E0B] shadow-[2px_2px_0px_#0A1128] resize-y leading-relaxed"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-sm font-medium text-[#0A1128] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:ring-2 focus:ring-[#F59E0B] shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] resize-y leading-relaxed"
               required
             />
           </div>
 
           {/* Pin Post Checkbox */}
-          <div className="flex items-center gap-3 p-3.5 bg-[#FEF3C7] border-2 border-[#0A1128] rounded-xl shadow-[3px_3px_0px_#0A1128]">
+          <div className="flex items-center gap-3 p-3.5 bg-[#FEF3C7] dark:bg-amber-950/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000]">
             <input
               type="checkbox"
               id="isPinnedModal"
@@ -257,7 +258,7 @@ export default function AnnouncementModal({
             />
             <label
               htmlFor="isPinnedModal"
-              className="text-xs font-black text-[#0A1128] cursor-pointer flex items-center gap-1.5 select-none"
+              className="text-xs font-black text-[#0A1128] dark:text-white cursor-pointer flex items-center gap-1.5 select-none"
             >
               <Pin className="w-4 h-4 text-[#D97706]" />
               <span>Sematkan di Urutan Paling Atas (Pinned Announcement)</span>
@@ -265,19 +266,19 @@ export default function AnnouncementModal({
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-end gap-3 pt-3 border-t-2 border-slate-100">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t-2 border-slate-100 dark:border-slate-800">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2.5 text-xs font-black uppercase tracking-wider text-slate-600 hover:text-slate-900 border-2 border-slate-300 hover:border-[#0A1128] rounded-xl transition-all cursor-pointer"
+              className="px-4 py-2.5 text-xs font-black uppercase tracking-wider text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border-2 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500 rounded-xl transition-all cursor-pointer"
             >
               Batal
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-xs uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-xs uppercase tracking-wider rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all disabled:opacity-50 cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>

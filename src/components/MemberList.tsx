@@ -171,23 +171,23 @@ export default function MemberList({
     switch (role) {
       case 'CHEF':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#FEF3C7] text-[#D97706] border border-[#0A1128] rounded-md text-[10px] font-black uppercase shadow-[1px_1px_0px_#0A1128]">
-            <Crown className="w-3 h-3 text-[#D97706]" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 border border-[#0A1128] dark:border-slate-700 rounded-md text-[10px] font-black uppercase shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]">
+            <Crown className="w-3 h-3 text-[#D97706] dark:text-amber-400" />
             <span>CHEF</span>
           </span>
         );
       case 'SIRKEL':
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-rose-100 text-[#E31B23] border border-[#0A1128] rounded-md text-[10px] font-black uppercase shadow-[1px_1px_0px_#0A1128]">
-            <Flame className="w-3 h-3 text-[#E31B23]" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-rose-100 dark:bg-rose-950/60 text-[#E31B23] dark:text-rose-300 border border-[#0A1128] dark:border-slate-700 rounded-md text-[10px] font-black uppercase shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]">
+            <Flame className="w-3 h-3 text-[#E31B23] dark:text-red-400" />
             <span>SIRKEL</span>
           </span>
         );
       case 'MALAZZ':
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-slate-100 text-slate-700 border border-slate-300 rounded-md text-[10px] font-black uppercase">
-            <Coffee className="w-3 h-3 text-slate-500" />
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 rounded-md text-[10px] font-black uppercase">
+            <Coffee className="w-3 h-3 text-slate-500 dark:text-slate-400" />
             <span>MALAZZ</span>
           </span>
         );
@@ -199,30 +199,30 @@ export default function MemberList({
     switch (status) {
       case 'online':
         return (
-          <span className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-700">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#0A1128]"></span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-black text-emerald-700 dark:text-emerald-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border border-[#0A1128] dark:border-slate-800"></span>
             <span>Online</span>
           </span>
         );
       case 'idle':
         return (
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-[#0A1128]"></span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700 dark:text-amber-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-[#0A1128] dark:border-slate-800"></span>
             <span>AFK / Idle</span>
           </span>
         );
       case 'dnd':
         return (
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 border border-[#0A1128]"></span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 dark:text-rose-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 border border-[#0A1128] dark:border-slate-800"></span>
             <span>Jangan Ganggu</span>
           </span>
         );
       case 'offline':
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400">
-            <span className="w-2.5 h-2.5 rounded-full bg-slate-300 border border-slate-400"></span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 dark:text-slate-500">
+            <span className="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 border border-slate-400 dark:border-slate-600"></span>
             <span>Offline</span>
           </span>
         );
@@ -232,7 +232,7 @@ export default function MemberList({
   return (
     <div>
       {/* Control Panel: Search, Filter Tabs & View Switcher */}
-      <div className="bg-white border-2 border-[#0A1128] rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#0A1128] mb-8 space-y-4">
+      <div className="bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000] mb-8 space-y-4">
         
         {/* Row 1: Search Bar + Sort + View Switcher */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
@@ -245,12 +245,12 @@ export default function MemberList({
               placeholder="Cari nama warga, judul game (e.g. Valorant, Roblox), atau nama voice room..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-9 py-2.5 bg-slate-50 border-2 border-[#0A1128] rounded-xl text-xs sm:text-sm font-bold text-[#0A1128] placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:ring-2 focus:ring-[#E31B23] shadow-[2px_2px_0px_#0A1128] transition-all"
+              className="w-full pl-10 pr-9 py-2.5 bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-[#0A1128] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#E31B23] shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] transition-all"
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-slate-200 text-slate-500 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -264,24 +264,24 @@ export default function MemberList({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortType)}
-                className="appearance-none pl-8 pr-7 py-2 bg-slate-50 hover:bg-slate-100 border-2 border-[#0A1128] rounded-xl text-xs font-black text-[#0A1128] shadow-[2px_2px_0px_#0A1128] cursor-pointer focus:outline-hidden"
+                className="appearance-none pl-8 pr-7 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-black text-[#0A1128] dark:text-white shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] cursor-pointer focus:outline-hidden"
               >
                 <option value="DEFAULT">Urutan Prioritas (Voice & Game)</option>
                 <option value="NAME_ASC">Nama (A - Z)</option>
                 <option value="NAME_DESC">Nama (Z - A)</option>
               </select>
-              <ArrowUpDown className="w-3.5 h-3.5 text-slate-600 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <ArrowUpDown className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
 
             {/* View Mode Switcher Toggle (Opsi 1) */}
-            <div className="flex items-center bg-slate-100 border-2 border-[#0A1128] rounded-xl p-0.5 shadow-[2px_2px_0px_#0A1128]">
+            <div className="flex items-center bg-slate-100 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl p-0.5 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
               <button
                 onClick={() => setViewMode('table')}
                 title="Tampilan Tabel"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                   viewMode === 'table'
-                    ? 'bg-[#0A1128] text-white shadow-[1px_1px_0px_#0A1128]'
-                    : 'text-slate-600 hover:text-[#0A1128]'
+                    ? 'bg-[#0A1128] dark:bg-red-600 text-white shadow-[1px_1px_0px_#0A1128]'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-[#0A1128] dark:hover:text-white'
                 }`}
               >
                 <TableIcon className="w-3.5 h-3.5" />
@@ -292,8 +292,8 @@ export default function MemberList({
                 title="Tampilan Grid Kartu"
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                   viewMode === 'grid'
-                    ? 'bg-[#0A1128] text-white shadow-[1px_1px_0px_#0A1128]'
-                    : 'text-slate-600 hover:text-[#0A1128]'
+                    ? 'bg-[#0A1128] dark:bg-red-600 text-white shadow-[1px_1px_0px_#0A1128]'
+                    : 'text-slate-600 dark:text-slate-300 hover:text-[#0A1128] dark:hover:text-white'
                 }`}
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
@@ -309,16 +309,16 @@ export default function MemberList({
           {/* Semua */}
           <button
             onClick={() => setFilter('ALL')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'ALL'
-                ? 'bg-[#0A1128] text-white border-[#0A1128] shadow-[2px_2px_0px_#E31B23]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#0A1128] dark:bg-red-600 text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#E31B23] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>Semua Warga</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'ALL' ? 'bg-[#E31B23] text-white' : 'bg-slate-100 text-slate-600'
+                filter === 'ALL' ? 'bg-[#E31B23] dark:bg-white text-white dark:text-red-600' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.total}
@@ -328,17 +328,17 @@ export default function MemberList({
           {/* Online Aktif */}
           <button
             onClick={() => setFilter('ONLINE')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'ONLINE'
-                ? 'bg-emerald-100 text-emerald-900 border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span>Online Aktif</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'ONLINE' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-600'
+                filter === 'ONLINE' ? 'bg-[#0A1128] dark:bg-emerald-500 text-white dark:text-slate-900' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.online}
@@ -348,17 +348,17 @@ export default function MemberList({
           {/* Di Voice */}
           <button
             onClick={() => setFilter('VOICE')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'VOICE'
-                ? 'bg-[#5865F2] text-white border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#5865F2] text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <Headphones className="w-3.5 h-3.5" />
             <span>Di Voice Channel</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'VOICE' ? 'bg-white text-[#5865F2]' : 'bg-slate-100 text-slate-600'
+                filter === 'VOICE' ? 'bg-white text-[#5865F2]' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.voice}
@@ -368,17 +368,17 @@ export default function MemberList({
           {/* Sedang Main Game */}
           <button
             onClick={() => setFilter('GAMING')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'GAMING'
-                ? 'bg-[#F59E0B] text-[#0A1128] border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#F59E0B] text-[#0A1128] border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <Gamepad2 className="w-3.5 h-3.5" />
             <span>Sedang Main Game</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'GAMING' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-600'
+                filter === 'GAMING' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.gaming}
@@ -388,17 +388,17 @@ export default function MemberList({
           {/* Staff / Inti */}
           <button
             onClick={() => setFilter('STAFF')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'STAFF'
-                ? 'bg-rose-100 text-rose-800 border-[#0A1128] shadow-[2px_2px_0px_#0A1128] ring-1 ring-[#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-300 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] ring-1 ring-[#0A1128]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
-            <Crown className="w-3.5 h-3.5 text-amber-600" />
+            <Crown className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             <span>Pengurus / Inti</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'STAFF' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-600'
+                filter === 'STAFF' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.staff}
@@ -408,17 +408,17 @@ export default function MemberList({
           {/* AFK / Idle */}
           <button
             onClick={() => setFilter('IDLE')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'IDLE'
-                ? 'bg-amber-100 text-amber-900 border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-amber-400"></span>
             <span>AFK / Idle</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'IDLE' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-600'
+                filter === 'IDLE' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
               }`}
             >
               {counts.idle}
@@ -428,17 +428,17 @@ export default function MemberList({
           {/* Offline */}
           <button
             onClick={() => setFilter('OFFLINE')}
-            className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'OFFLINE'
-                ? 'bg-slate-200 text-slate-900 border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-500 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-200 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span className="w-2 h-2 rounded-full bg-slate-400"></span>
             <span>Offline</span>
             <span
               className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${
-                filter === 'OFFLINE' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-500'
+                filter === 'OFFLINE' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
               }`}
             >
               {counts.offline}
@@ -450,10 +450,10 @@ export default function MemberList({
 
       {/* Empty State */}
       {filteredMembers.length === 0 ? (
-        <div className="text-center py-16 px-4 bg-white border-2 border-[#0A1128] rounded-2xl shadow-[4px_4px_0px_#0A1128]">
-          <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-          <h3 className="font-black text-lg text-[#0A1128]">Tidak Ada Warga Ditemukan</h3>
-          <p className="text-sm text-slate-500 max-w-sm mx-auto mt-1 font-medium">
+        <div className="text-center py-16 px-4 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+          <Users className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+          <h3 className="font-black text-lg text-[#0A1128] dark:text-white">Tidak Ada Warga Ditemukan</h3>
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1 font-medium">
             {search || filter !== 'ALL'
               ? 'Tidak ada warga yang sesuai dengan kata kunci atau filter saat ini.'
               : 'Belum ada warga yang terdeteksi online.'}
@@ -464,7 +464,7 @@ export default function MemberList({
                 setSearch('');
                 setFilter('ALL');
               }}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-[#0A1128] text-xs font-black rounded-xl border-2 border-[#0A1128] shadow-[2px_2px_0px_#0A1128] transition-all cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#0A1128] dark:text-white text-xs font-black rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer"
             >
               Reset Filter & Pencarian
             </button>
@@ -474,12 +474,12 @@ export default function MemberList({
         /* ======================================================== */
         /* OPTION 1: NEO-BRUTALISM DATA TABLE VIEW                  */
         /* ======================================================== */
-        <div className="bg-white border-2 border-[#0A1128] rounded-2xl shadow-[5px_5px_0px_#0A1128] overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[700px]">
               {/* Table Header */}
               <thead>
-                <tr className="bg-[#0A1128] text-white text-xs font-black uppercase tracking-wider border-b-2 border-[#0A1128]">
+                <tr className="bg-[#0A1128] dark:bg-slate-950 text-white text-xs font-black uppercase tracking-wider border-b-2 border-[#0A1128] dark:border-slate-800">
                   <th className="py-3.5 px-4 w-12 text-center">#</th>
                   <th className="py-3.5 px-4">Warga Discord</th>
                   <th className="py-3.5 px-4">Peran (Role)</th>
@@ -490,7 +490,7 @@ export default function MemberList({
               </thead>
 
               {/* Table Body */}
-              <tbody className="divide-y-2 divide-slate-100 text-xs">
+              <tbody className="divide-y-2 divide-slate-100 dark:divide-slate-800 text-xs">
                 {paginatedMembers.map((m, idx) => {
                   const channelName = m.channel_id ? channelMap.get(m.channel_id) : null;
                   const role = getMemberRole(m);
@@ -500,11 +500,11 @@ export default function MemberList({
                     <tr
                       key={m.id}
                       onClick={() => setSelectedMember(m)}
-                      className="hover:bg-amber-50/70 transition-colors group cursor-pointer"
+                      className="hover:bg-amber-50/70 dark:hover:bg-slate-800/80 transition-colors group cursor-pointer"
                       title="Klik untuk melihat profil detail"
                     >
                       {/* 1. Index */}
-                      <td className="py-3.5 px-4 text-center font-bold text-slate-400">
+                      <td className="py-3.5 px-4 text-center font-bold text-slate-400 dark:text-slate-500">
                         {absoluteIdx}
                       </td>
 
@@ -512,7 +512,7 @@ export default function MemberList({
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-3">
                           <div className="relative shrink-0">
-                            <div className="w-9 h-9 rounded-xl border-2 border-[#0A1128] overflow-hidden bg-slate-100 shadow-[2px_2px_0px_#0A1128]">
+                            <div className="w-9 h-9 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={m.avatar_url}
@@ -522,7 +522,7 @@ export default function MemberList({
                             </div>
                             {/* Status Dot */}
                             <span
-                              className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white ${
+                              className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white dark:border-slate-900 ${
                                 m.status === 'online'
                                   ? 'bg-emerald-500'
                                   : m.status === 'idle'
@@ -535,10 +535,10 @@ export default function MemberList({
                           </div>
 
                           <div className="min-w-0">
-                            <div className="font-black text-sm text-[#0A1128] group-hover:text-[#E31B23] transition-colors truncate">
+                            <div className="font-black text-sm text-[#0A1128] dark:text-white group-hover:text-[#E31B23] dark:group-hover:text-red-400 transition-colors truncate">
                               {m.username}
                             </div>
-                            <div className="text-[10px] text-slate-400 font-semibold truncate">
+                            <div className="text-[10px] text-slate-400 dark:text-slate-500 font-semibold truncate">
                               ID: {m.id}
                             </div>
                           </div>
@@ -558,12 +558,12 @@ export default function MemberList({
                       {/* 5. Game Activity */}
                       <td className="py-3.5 px-4">
                         {m.game ? (
-                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-50 border border-red-200 rounded-lg text-xs font-black text-[#E31B23]">
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-lg text-xs font-black text-[#E31B23] dark:text-red-400">
                             <Gamepad2 className="w-3.5 h-3.5 shrink-0" />
                             <span className="truncate max-w-[180px]">{m.game.name}</span>
                           </div>
                         ) : (
-                          <span className="text-slate-400 font-semibold italic text-[11px]">
+                          <span className="text-slate-400 dark:text-slate-500 font-semibold italic text-[11px]">
                             {m.status === 'offline' ? 'Sedang Offline' : 'Santai di Server'}
                           </span>
                         )}
@@ -572,12 +572,12 @@ export default function MemberList({
                       {/* 6. Voice Channel */}
                       <td className="py-3.5 px-4">
                         {channelName ? (
-                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 border-2 border-indigo-300 rounded-lg text-xs font-black text-indigo-800 shadow-[1px_1px_0px_#0A1128]">
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950/40 border-2 border-indigo-300 dark:border-indigo-800 rounded-lg text-xs font-black text-indigo-800 dark:text-indigo-300 shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]">
                             <Headphones className="w-3.5 h-3.5 text-indigo-600 animate-pulse shrink-0" />
                             <span className="truncate max-w-[160px]">{channelName}</span>
                           </div>
                         ) : (
-                          <span className="text-slate-300 font-bold">-</span>
+                          <span className="text-slate-300 dark:text-slate-600 font-bold">-</span>
                         )}
                       </td>
                     </tr>
@@ -588,10 +588,10 @@ export default function MemberList({
           </div>
 
           {/* Table Footer Info */}
-          <div className="px-5 py-3.5 bg-slate-50 border-t-2 border-[#0A1128] flex items-center justify-between flex-wrap gap-2 text-xs font-bold text-slate-500">
+          <div className="px-5 py-3.5 bg-slate-50 dark:bg-slate-800/60 border-t-2 border-[#0A1128] dark:border-slate-700 flex items-center justify-between flex-wrap gap-2 text-xs font-bold text-slate-500 dark:text-slate-400">
             <div>
-              Menampilkan <span className="font-black text-[#0A1128]">{paginatedMembers.length}</span> dari{' '}
-              <span className="font-black text-[#0A1128]">{filteredMembers.length}</span> warga terfilter ({members.length} total warga)
+              Menampilkan <span className="font-black text-[#0A1128] dark:text-white">{paginatedMembers.length}</span> dari{' '}
+              <span className="font-black text-[#0A1128] dark:text-white">{filteredMembers.length}</span> warga terfilter ({members.length} total warga)
             </div>
             <div className="flex items-center gap-1.5 text-[11px]">
               <Radio className="w-3 h-3 text-emerald-500 animate-pulse" />
@@ -612,14 +612,14 @@ export default function MemberList({
               <div
                 key={m.id}
                 onClick={() => setSelectedMember(m)}
-                className="bg-white border-2 border-[#0A1128] rounded-2xl p-4 shadow-[4px_4px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#0A1128] transition-all flex flex-col justify-between cursor-pointer group"
+                className="bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-4 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#0A1128] dark:hover:shadow-[6px_6px_0px_#000000] transition-all flex flex-col justify-between cursor-pointer group"
                 title="Klik untuk melihat profil detail"
               >
                 <div>
                   <div className="flex items-start gap-3.5 mb-3">
                     {/* Avatar + Status Indicator */}
                     <div className="relative shrink-0">
-                      <div className="w-12 h-12 rounded-xl border-2 border-[#0A1128] overflow-hidden bg-slate-100 shadow-[2px_2px_0px_#0A1128]">
+                      <div className="w-12 h-12 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={m.avatar_url}
@@ -629,7 +629,7 @@ export default function MemberList({
                       </div>
                       {/* Status Dot */}
                       <span
-                        className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white ${
+                        className={`absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-white dark:border-slate-900 ${
                           m.status === 'online'
                             ? 'bg-emerald-500'
                             : m.status === 'idle'
@@ -645,7 +645,7 @@ export default function MemberList({
                     {/* Name & Details */}
                     <div className="overflow-hidden flex-1">
                       <div className="flex items-center justify-between gap-1 mb-1">
-                        <h4 className="font-black text-sm text-[#0A1128] truncate">
+                        <h4 className="font-black text-sm text-[#0A1128] dark:text-white truncate">
                           {m.username}
                         </h4>
                         <div>{renderRoleBadge(role)}</div>
@@ -653,12 +653,12 @@ export default function MemberList({
 
                       {/* Game Activity */}
                       {m.game ? (
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-[#E31B23] mt-0.5 truncate">
+                        <div className="flex items-center gap-1 text-[11px] font-bold text-[#E31B23] dark:text-red-400 mt-0.5 truncate">
                           <Gamepad2 className="w-3.5 h-3.5 shrink-0" />
                           <span className="truncate">{m.game.name}</span>
                         </div>
                       ) : (
-                        <div className="text-[11px] font-semibold text-slate-400 mt-0.5">
+                        <div className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-0.5">
                           {m.status === 'online'
                             ? 'Santai di Server'
                             : m.status === 'idle'
@@ -673,7 +673,7 @@ export default function MemberList({
 
                   {/* Voice Channel Pill */}
                   {channelName && (
-                    <div className="mb-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 border-2 border-indigo-300 rounded-lg text-[11px] font-black text-indigo-800 shadow-[1px_1px_0px_#0A1128] w-full">
+                    <div className="mb-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950/40 border-2 border-indigo-300 dark:border-indigo-800 rounded-lg text-[11px] font-black text-indigo-800 dark:text-indigo-300 shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000] w-full">
                       <Headphones className="w-3.5 h-3.5 text-indigo-600 animate-pulse shrink-0" />
                       <span className="truncate">{channelName}</span>
                     </div>
@@ -681,7 +681,7 @@ export default function MemberList({
                 </div>
 
                 {/* Card Footer */}
-                <div className="mt-2 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                <div className="mt-2 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px]">
                   <div>{renderStatusBadge(m.status)}</div>
                   <span className="text-[10px] font-bold text-slate-400 uppercase">Warga Discord</span>
                 </div>
@@ -693,26 +693,26 @@ export default function MemberList({
 
       {/* Pagination Controls */}
       {filteredMembers.length > 0 && (
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white border-2 border-[#0A1128] rounded-2xl p-4 shadow-[4px_4px_0px_#0A1128]">
-          <div className="text-xs font-bold text-slate-600">
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-4 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+          <div className="text-xs font-bold text-slate-600 dark:text-slate-400">
             Menampilkan{' '}
-            <span className="font-black text-[#0A1128]">
+            <span className="font-black text-[#0A1128] dark:text-white">
               {pageSize === 'ALL'
                 ? 1
                 : Math.min((currentPage - 1) * (typeof pageSize === 'number' ? pageSize : 60) + 1, filteredMembers.length)}
             </span>{' '}
             -{' '}
-            <span className="font-black text-[#0A1128]">
+            <span className="font-black text-[#0A1128] dark:text-white">
               {pageSize === 'ALL'
                 ? filteredMembers.length
                 : Math.min(currentPage * (typeof pageSize === 'number' ? pageSize : 60), filteredMembers.length)}
             </span>{' '}
-            dari <span className="font-black text-[#0A1128]">{filteredMembers.length}</span> warga
+            dari <span className="font-black text-[#0A1128] dark:text-white">{filteredMembers.length}</span> warga
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {/* Page Size Selector */}
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-600 mr-2">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400 mr-2">
               <span className="hidden sm:inline">Per halaman:</span>
               <select
                 value={pageSize}
@@ -720,7 +720,7 @@ export default function MemberList({
                   const val = e.target.value === 'ALL' ? 'ALL' : Number(e.target.value);
                   setPageSize(val);
                 }}
-                className="px-2.5 py-1.5 bg-slate-50 border-2 border-[#0A1128] rounded-lg text-xs font-black text-[#0A1128] shadow-[1px_1px_0px_#0A1128] cursor-pointer"
+                className="px-2.5 py-1.5 bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-lg text-xs font-black text-[#0A1128] dark:text-white shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000] cursor-pointer"
               >
                 <option value={30}>30</option>
                 <option value={60}>60</option>
@@ -735,10 +735,10 @@ export default function MemberList({
                 <button
                   onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="p-1.5 rounded-lg border-2 border-[#0A1128] bg-white hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed shadow-[1px_1px_0px_#0A1128] cursor-pointer transition-all"
+                  className="p-1.5 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000] cursor-pointer transition-all"
                   title="Halaman Sebelumnya"
                 >
-                  <ChevronLeft className="w-4 h-4 text-[#0A1128]" />
+                  <ChevronLeft className="w-4 h-4 text-[#0A1128] dark:text-white" />
                 </button>
 
                 {/* Page numbers with smart ellipsis */}
@@ -763,8 +763,8 @@ export default function MemberList({
                           onClick={() => setCurrentPage(item)}
                           className={`w-8 h-8 rounded-lg border-2 text-xs font-black transition-all cursor-pointer ${
                             currentPage === item
-                              ? 'bg-[#0A1128] text-white border-[#0A1128] shadow-[2px_2px_0px_#E31B23]'
-                              : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                              ? 'bg-[#0A1128] dark:bg-red-600 text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#E31B23] dark:shadow-[2px_2px_0px_#000000]'
+                              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
                           }`}
                         >
                           {item}
@@ -776,10 +776,10 @@ export default function MemberList({
                 <button
                   onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="p-1.5 rounded-lg border-2 border-[#0A1128] bg-white hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed shadow-[1px_1px_0px_#0A1128] cursor-pointer transition-all"
+                  className="p-1.5 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000] cursor-pointer transition-all"
                   title="Halaman Selanjutnya"
                 >
-                  <ChevronRight className="w-4 h-4 text-[#0A1128]" />
+                  <ChevronRight className="w-4 h-4 text-[#0A1128] dark:text-white" />
                 </button>
               </div>
             )}
@@ -790,32 +790,32 @@ export default function MemberList({
       {/* Member Profile Detail Modal */}
       {selectedMember && (
         <div
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 bg-black/60 dark:bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150"
           onClick={() => setSelectedMember(null)}
         >
           <div
-            className="bg-white border-3 border-[#0A1128] rounded-3xl max-w-md w-full shadow-[8px_8px_0px_#0A1128] overflow-hidden animate-in zoom-in-95 duration-150 relative"
+            className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl max-w-md w-full shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] overflow-hidden animate-in zoom-in-95 duration-150 relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Banner with Role Theme */}
             <div
-              className={`px-6 py-4 border-b-3 border-[#0A1128] flex items-center justify-between ${
+              className={`px-6 py-4 border-b-3 border-[#0A1128] dark:border-slate-700 flex items-center justify-between ${
                 getMemberRole(selectedMember) === 'CHEF'
-                  ? 'bg-[#FEF3C7]'
+                  ? 'bg-[#FEF3C7] dark:bg-amber-950/80'
                   : getMemberRole(selectedMember) === 'SIRKEL'
-                  ? 'bg-red-100'
-                  : 'bg-slate-100'
+                  ? 'bg-red-100 dark:bg-rose-950/80'
+                  : 'bg-slate-100 dark:bg-slate-800'
               }`}
             >
               <div className="flex items-center gap-2">
-                <Shield className="w-4 h-4 text-[#0A1128]" />
-                <span className="text-xs font-black uppercase tracking-wider text-[#0A1128]">
+                <Shield className="w-4 h-4 text-[#0A1128] dark:text-white" />
+                <span className="text-xs font-black uppercase tracking-wider text-[#0A1128] dark:text-white">
                   Profil Warga SuperMalazz
                 </span>
               </div>
               <button
                 onClick={() => setSelectedMember(null)}
-                className="p-1.5 rounded-lg border-2 border-[#0A1128] bg-white hover:bg-slate-100 text-[#0A1128] shadow-[2px_2px_0px_#0A1128] cursor-pointer"
+                className="p-1.5 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-[#0A1128] dark:text-white shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] cursor-pointer"
                 title="Tutup"
               >
                 <X className="w-4 h-4" />
@@ -827,7 +827,7 @@ export default function MemberList({
               {/* Avatar + Main Info */}
               <div className="flex items-center gap-4">
                 <div className="relative shrink-0">
-                  <div className="w-20 h-20 rounded-2xl border-3 border-[#0A1128] overflow-hidden bg-slate-100 shadow-[4px_4px_0px_#0A1128]">
+                  <div className="w-20 h-20 rounded-2xl border-3 border-[#0A1128] dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={selectedMember.avatar_url}
@@ -836,7 +836,7 @@ export default function MemberList({
                     />
                   </div>
                   <span
-                    className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white ${
+                    className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white dark:border-slate-900 ${
                       selectedMember.status === 'online'
                         ? 'bg-emerald-500'
                         : selectedMember.status === 'idle'
@@ -849,11 +849,11 @@ export default function MemberList({
                 </div>
 
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-black text-xl text-[#0A1128] truncate leading-tight mb-0.5">
+                  <h3 className="font-black text-xl text-[#0A1128] dark:text-white truncate leading-tight mb-0.5">
                     {selectedMember.username}
                   </h3>
                   {selectedMember.global_name && selectedMember.global_name !== selectedMember.username && (
-                    <div className="text-xs font-bold text-slate-500 truncate mb-1">
+                    <div className="text-xs font-bold text-slate-500 dark:text-slate-400 truncate mb-1">
                       {selectedMember.global_name}
                     </div>
                   )}
@@ -865,14 +865,14 @@ export default function MemberList({
               </div>
 
               {/* ID Discord Container with 1-Click Copy */}
-              <div className="bg-slate-50 border-2 border-[#0A1128] rounded-2xl p-3.5 flex items-center justify-between shadow-[2px_2px_0px_#0A1128]">
+              <div className="bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-3.5 flex items-center justify-between shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                 <div>
                   <div className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Discord User ID</div>
-                  <div className="font-mono text-xs font-black text-[#0A1128]">{selectedMember.id}</div>
+                  <div className="font-mono text-xs font-black text-[#0A1128] dark:text-white">{selectedMember.id}</div>
                 </div>
                 <button
                   onClick={(e) => handleCopyId(selectedMember.id, e)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-100 border-2 border-[#0A1128] rounded-xl text-xs font-black text-[#0A1128] shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-black text-[#0A1128] dark:text-white shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all cursor-pointer"
                 >
                   {copiedId ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedId ? 'Tersalin' : 'Salin ID'}</span>
@@ -883,12 +883,12 @@ export default function MemberList({
               <div className="space-y-2.5">
                 {/* Voice Channel */}
                 {selectedMember.channel_id && (
-                  <div className="p-3 bg-indigo-50 border-2 border-indigo-300 rounded-xl flex items-center justify-between shadow-[2px_2px_0px_#0A1128]">
+                  <div className="p-3 bg-indigo-50 dark:bg-indigo-950/40 border-2 border-indigo-300 dark:border-indigo-800 rounded-xl flex items-center justify-between shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                     <div className="flex items-center gap-2">
                       <Headphones className="w-4 h-4 text-indigo-600 animate-pulse" />
                       <div>
                         <div className="text-[10px] font-black text-indigo-500 uppercase">Voice Room</div>
-                        <div className="text-xs font-black text-indigo-900">
+                        <div className="text-xs font-black text-indigo-900 dark:text-indigo-200">
                           {channelMap.get(selectedMember.channel_id) || 'Voice Room'}
                         </div>
                       </div>
@@ -907,7 +907,7 @@ export default function MemberList({
 
                 {/* Game Activity */}
                 {selectedMember.game && (
-                  <div className="p-3 bg-red-50 border-2 border-red-200 rounded-xl flex items-center gap-2.5 shadow-[2px_2px_0px_#0A1128]">
+                  <div className="p-3 bg-red-50 dark:bg-red-950/40 border-2 border-red-200 dark:border-red-900 rounded-xl flex items-center gap-2.5 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                     <Gamepad2 className="w-4 h-4 text-[#E31B23]" />
                     <div>
                       <div className="text-[10px] font-black text-red-500 uppercase">Sedang Bermain</div>
@@ -918,11 +918,11 @@ export default function MemberList({
 
                 {/* Joined At Date */}
                 {selectedMember.joined_at && (
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-500 px-1 pt-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 px-1 pt-1">
                     <Calendar className="w-3.5 h-3.5 text-slate-400" />
                     <span>
                       Bergabung di server:{' '}
-                      <strong className="text-[#0A1128]">
+                      <strong className="text-[#0A1128] dark:text-white">
                         {new Date(selectedMember.joined_at).toLocaleDateString('id-ID', {
                           day: 'numeric',
                           month: 'long',
@@ -940,7 +940,7 @@ export default function MemberList({
                   href={`https://discord.com/users/${selectedMember.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all"
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 bg-[#5865F2] hover:bg-[#4752C4] text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>Buka Profil di Discord</span>

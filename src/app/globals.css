@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary-red: #E31B23;
   --color-primary-red-hover: #c41219;
@@ -23,11 +25,17 @@
   --foreground: #0A1128;
 }
 
+.dark {
+  --background: #080D1A;
+  --foreground: #F1F5F9;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Neo-Brutalism Utility Classes */
@@ -35,20 +43,40 @@ body {
   border: 2px solid #0A1128;
 }
 
+.dark .brutal-border {
+  border-color: #334155;
+}
+
 .brutal-border-thick {
   border: 3px solid #0A1128;
+}
+
+.dark .brutal-border-thick {
+  border-color: #334155;
 }
 
 .brutal-shadow {
   box-shadow: 4px 4px 0px #0A1128;
 }
 
+.dark .brutal-shadow {
+  box-shadow: 4px 4px 0px #000000;
+}
+
 .brutal-shadow-sm {
   box-shadow: 2px 2px 0px #0A1128;
 }
 
+.dark .brutal-shadow-sm {
+  box-shadow: 2px 2px 0px #000000;
+}
+
 .brutal-shadow-lg {
   box-shadow: 6px 6px 0px #0A1128;
+}
+
+.dark .brutal-shadow-lg {
+  box-shadow: 6px 6px 0px #000000;
 }
 
 .brutal-shadow-red {
@@ -65,14 +93,27 @@ body {
   transition: all 0.15s ease-in-out;
 }
 
+.dark .brutal-btn {
+  border-color: #334155;
+  box-shadow: 4px 4px 0px #000000;
+}
+
 .brutal-btn:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px #0A1128;
 }
 
+.dark .brutal-btn:hover {
+  box-shadow: 6px 6px 0px #000000;
+}
+
 .brutal-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0px #0A1128;
+}
+
+.dark .brutal-btn:active {
+  box-shadow: 1px 1px 0px #000000;
 }
 
 .brutal-card {
@@ -82,10 +123,22 @@ body {
   border-radius: 0.75rem;
 }
 
+.dark .brutal-card {
+  border-color: #334155;
+  box-shadow: 4px 4px 0px #000000;
+  background-color: #0F172A;
+}
+
 /* Subtle grid pattern */
 .bg-grid-pattern {
   background-size: 24px 24px;
   background-image: 
     linear-gradient(to right, rgba(10, 17, 40, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(10, 17, 40, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }

@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 export default async function GaleriPage() {
   const user = await getCurrentUser();
   const moments = await getMoments();
-  const canAdd = true;
+  const canAdd = Boolean(user);
 
   return (
     <div className="min-h-screen bg-grid-pattern py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

@@ -127,15 +127,15 @@ export default function ReactionPicker({
               isSmall ? 'px-2 py-1 text-xs' : 'px-2.5 py-1.5 text-sm'
             } ${
               hasReacted
-                ? 'bg-[#FEF3C7] border-[#0A1128] text-[#0A1128] shadow-[2px_2px_0px_#F59E0B] scale-105'
+                ? 'bg-[#FEF3C7] dark:bg-amber-950/60 border-[#0A1128] dark:border-amber-500 text-[#0A1128] dark:text-amber-200 shadow-[2px_2px_0px_#F59E0B] scale-105'
                 : count > 0
-                ? 'bg-white border-[#0A1128] text-slate-700 shadow-[1px_1px_0px_#0A1128] hover:bg-slate-50'
-                : 'bg-slate-50/80 border-slate-200 text-slate-400 hover:border-[#0A1128] hover:text-slate-700 hover:bg-white'
+                ? 'bg-white dark:bg-slate-800 border-[#0A1128] dark:border-slate-600 text-slate-700 dark:text-slate-200 shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000] hover:bg-slate-50 dark:hover:bg-slate-700'
+                : 'bg-slate-50/80 dark:bg-slate-800/40 border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:border-[#0A1128] dark:hover:border-slate-500 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-white dark:hover:bg-slate-800'
             }`}
           >
             <span className={isSmall ? 'text-sm' : 'text-base'}>{emoji}</span>
             {count > 0 && (
-              <span className={`font-black ${hasReacted ? 'text-[#0A1128]' : 'text-slate-600'}`}>
+              <span className={`font-black ${hasReacted ? 'text-[#0A1128] dark:text-amber-200' : 'text-slate-600 dark:text-slate-300'}`}>
                 {count}
               </span>
             )}

@@ -10,8 +10,8 @@ export default async function PengumumanPage() {
   const user = await getCurrentUser();
   const { announcements } = await getAnnouncements();
   
-  // Allow full control so user can add and delete freely as requested
-  const isChef = true;
+  // Role check: CHEF has pin & delete privileges
+  const isChef = user?.role === 'CHEF';
 
   return (
     <div className="min-h-screen bg-grid-pattern py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
@@ -46,7 +46,7 @@ export default async function PengumumanPage() {
         <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-[#0A1128] rounded-xl shadow-[3px_3px_0px_#0A1128] text-xs font-bold text-slate-700 self-start sm:self-auto">
           <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
           <span>
-            Mode: <strong className="font-black text-[#0A1128]">{user ? `${user.role} (${user.displayName})` : 'CHEF / Admin Akses Penuh'}</strong>
+            Mode: <strong className="font-black text-[#0A1128]">{user ? `${user.role} (${user.displayName || user.username})` : 'Tamu (Wajib Login untuk Buat)'}</strong>
           </span>
         </div>
       </div>

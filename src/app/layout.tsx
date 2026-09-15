@@ -38,8 +38,27 @@ export default async function RootLayout({
   const onlineCount = widget?.presence_count || 60;
 
   return (
-    <html lang="id" className={`${plusJakartaSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#F8FAFC] text-[#0A1128] font-sans">
+    <html lang="id" suppressHydrationWarning className={`${plusJakartaSans.variable} h-full antialiased`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('supermalazz-theme');
+                  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#F8FAFC] dark:bg-[#080D1A] text-[#0A1128] dark:text-[#F1F5F9] font-sans transition-colors duration-200">
         <Navbar user={user} onlineCount={onlineCount} />
         <main className="flex-1">{children}</main>
         <Footer />

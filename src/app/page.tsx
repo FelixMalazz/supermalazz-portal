@@ -110,7 +110,7 @@ export default async function HomePage() {
           <div className="flex flex-col items-center justify-center gap-3 mb-6">
             <div className="relative group">
               {/* Outer decorative neo shadow box */}
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-white border-3 border-[#0A1128] p-3 shadow-[8px_8px_0px_#0A1128] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-[4px_4px_0px_#0A1128] transition-all overflow-hidden flex items-center justify-center">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 p-3 shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-[4px_4px_0px_#0A1128] dark:group-hover:shadow-[4px_4px_0px_#000000] transition-all overflow-hidden flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo.png"
@@ -120,7 +120,7 @@ export default async function HomePage() {
               </div>
 
               {/* Floating Badge on Logo */}
-              <div className="absolute -bottom-2 -right-3 px-3 py-1 bg-[#F59E0B] text-[#0A1128] text-[10px] font-black uppercase rounded-lg border-2 border-[#0A1128] shadow-[2px_2px_0px_#0A1128] rotate-2">
+              <div className="absolute -bottom-2 -right-3 px-3 py-1 bg-[#F59E0B] text-[#0A1128] text-[10px] font-black uppercase rounded-lg border-2 border-[#0A1128] dark:border-slate-900 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] rotate-2">
                 Official Server
               </div>
             </div>
@@ -130,31 +130,31 @@ export default async function HomePage() {
           <div className="flex items-center justify-center pt-1 mb-6">
             <Link
               href="/members"
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-white hover:bg-emerald-50 border-2 border-[#0A1128] rounded-full shadow-[3px_3px_0px_#0A1128] hover:shadow-[1px_1px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all group"
+              className="inline-flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border-2 border-[#0A1128] dark:border-slate-700 rounded-full shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:shadow-[1px_1px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all group"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
-              <span className="text-xs font-black uppercase tracking-wider text-[#0A1128]">
+              <span className="text-xs font-black uppercase tracking-wider text-[#0A1128] dark:text-slate-200">
                 Server Online &bull; <span className="text-[#E31B23]">{totalCount} Warga</span> ({onlineCount} Online)
               </span>
-              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0A1128] group-hover:translate-x-0.5 transition-all" />
+              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#0A1128] dark:group-hover:text-white group-hover:translate-x-0.5 transition-all" />
             </Link>
           </div>
 
           {/* Headline Utama */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#0A1128] tracking-tight leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#0A1128] dark:text-white tracking-tight leading-[1.08]">
             Bukan Sekadar Discord, Ini{' '}
-            <span className="inline-block bg-[#E31B23] text-white px-4 py-0.5 rounded-2xl border-3 border-[#0A1128] shadow-[5px_5px_0px_#0A1128] -rotate-1 hover:rotate-0 transition-transform">
+            <span className="inline-block bg-[#E31B23] text-white px-4 py-0.5 rounded-2xl border-3 border-[#0A1128] dark:border-slate-700 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] -rotate-1 hover:rotate-0 transition-transform">
               Rumah Kedua
             </span>{' '}
             Lo.
           </h1>
 
           {/* Subheadline / Deskripsi with higher contrast */}
-          <p className="text-base sm:text-lg text-slate-700 font-medium max-w-2xl mx-auto leading-relaxed">
-            Portal resmi komunitas <strong className="text-[#0A1128] font-bold">SuperMalazz</strong>. Sinkronisasi role otomatis, galeri momen mabar, dan tempat nongkrong virtual tanpa drama.
+          <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium max-w-2xl mx-auto leading-relaxed">
+            Portal resmi komunitas <strong className="text-[#0A1128] dark:text-white font-bold">SuperMalazz</strong>. Sinkronisasi role otomatis, galeri momen mabar, dan tempat nongkrong virtual tanpa drama.
           </p>
 
           {/* Action CTAs (Side by side flex row) */}
@@ -171,7 +171,7 @@ export default async function HomePage() {
 
             <Link
               href="/galeri"
-              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 bg-white hover:bg-slate-50 text-black text-sm sm:text-base font-black uppercase tracking-wider rounded-xl border-2 border-black shadow-[4px_4px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-black dark:text-white text-sm sm:text-base font-black uppercase tracking-wider rounded-xl border-2 border-black dark:border-slate-700 shadow-[4px_4px_0px_#000] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0px_#000] active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all"
             >
               <Camera className="w-4 h-4 text-[#E31B23]" />
               <span>Jelajahi Galeri</span>
@@ -181,8 +181,8 @@ export default async function HomePage() {
           {/* User Welcome Pill */}
           {user && (
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border-2 border-[#0A1128] rounded-xl text-xs font-bold text-[#0A1128] shadow-[2px_2px_0px_#0A1128]">
-                👋 Selamat datang kembali, <strong className="text-[#E31B23]">{user.displayName || user.username}</strong>! Role: <span className="font-black px-1.5 py-0.5 bg-slate-100 rounded border border-[#0A1128]">{user.role}</span>
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-bold text-[#0A1128] dark:text-slate-200 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+                👋 Selamat datang kembali, <strong className="text-[#E31B23]">{user.displayName || user.username}</strong>! Role: <span className="font-black px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded border border-[#0A1128] dark:border-slate-700">{user.role}</span>
               </span>
             </div>
           )}
@@ -192,7 +192,7 @@ export default async function HomePage() {
       {/* 2. LIVE VOICE ACTIVITY SECTION */}
       {voiceMembers.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 sm:px-6 mb-16">
-          <div className="bg-[#0A1128] text-white border-3 border-[#0A1128] rounded-3xl p-6 sm:p-7 shadow-[8px_8px_0px_#E31B23] relative overflow-hidden">
+          <div className="bg-[#0A1128] dark:bg-slate-900 text-white border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-7 shadow-[8px_8px_0px_#E31B23] dark:shadow-[8px_8px_0px_#000000] relative overflow-hidden">
             <div className="flex items-center justify-between gap-4 mb-5 flex-wrap">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-3.5 w-3.5 relative">
@@ -243,19 +243,19 @@ export default async function HomePage() {
       {/* 3. PINNED POST ANNOUNCEMENT */}
       {pinnedAnnouncement && (
         <section className="max-w-5xl mx-auto px-4 sm:px-6 mb-16">
-          <div className="bg-[#FFFBEB] border-3 border-[#0A1128] rounded-3xl p-6 sm:p-7 shadow-[6px_6px_0px_#0A1128] relative overflow-hidden">
+          <div className="bg-[#FFFBEB] dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-7 shadow-[6px_6px_0px_#0A1128] dark:shadow-[6px_6px_0px_#000000] relative overflow-hidden">
             <div className="flex items-center justify-between gap-3 mb-3 flex-wrap">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F59E0B] text-[#0A1128] text-xs font-black uppercase rounded-xl border-2 border-[#0A1128] shadow-[2px_2px_0px_#0A1128]">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F59E0B] text-[#0A1128] text-xs font-black uppercase rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                   <Pin className="w-3.5 h-3.5" />
                   Pengumuman Resmi
                 </span>
-                <span className="text-xs font-black text-slate-500">
+                <span className="text-xs font-black text-slate-500 dark:text-slate-400">
                   Oleh {pinnedAnnouncement.author.displayName || pinnedAnnouncement.author.username} ({pinnedAnnouncement.author.role})
                 </span>
               </div>
 
-              <span className="text-xs font-bold text-slate-500">
+              <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                 {new Date(pinnedAnnouncement.createdAt).toLocaleDateString('id-ID', {
                   day: 'numeric',
                   month: 'long',
@@ -264,17 +264,17 @@ export default async function HomePage() {
               </span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-black text-[#0A1128] mb-2 leading-snug">
+            <h3 className="text-xl sm:text-2xl font-black text-[#0A1128] dark:text-white mb-2 leading-snug">
               {pinnedAnnouncement.title}
             </h3>
 
-            <p className="text-sm sm:text-base text-slate-700 line-clamp-2 leading-relaxed mb-4 font-medium">
+            <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 line-clamp-2 leading-relaxed mb-4 font-medium">
               {pinnedAnnouncement.content}
             </p>
 
             <Link
               href="/pengumuman"
-              className="inline-flex items-center gap-1.5 text-xs font-black text-[#E31B23] hover:text-[#c41219] uppercase tracking-wider underline underline-offset-4"
+              className="inline-flex items-center gap-1.5 text-xs font-black text-[#E31B23] hover:text-[#c41219] dark:text-red-400 dark:hover:text-red-300 uppercase tracking-wider underline underline-offset-4"
             >
               <span>Baca Selengkapnya di Portal Pengumuman</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -288,18 +288,18 @@ export default async function HomePage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 border-2 border-[#0A1128] rounded-lg text-xs font-black text-[#E31B23] uppercase tracking-wider mb-2">
-                <Camera className="w-3.5 h-3.5 text-[#E31B23]" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 dark:bg-red-950/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-lg text-xs font-black text-[#E31B23] dark:text-red-400 uppercase tracking-wider mb-2">
+                <Camera className="w-3.5 h-3.5 text-[#E31B23] dark:text-red-400" />
                 <span>Kenangan Tongkrongan</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#0A1128] tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-black text-[#0A1128] dark:text-white tracking-tight">
                 Galeri Momen SuperMalazz
               </h2>
             </div>
 
             <Link
               href="/galeri"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0A1128] hover:bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-wider border-2 border-[#0A1128] shadow-[4px_4px_0px_#E31B23] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#E31B23] transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0A1128] hover:bg-slate-900 dark:bg-red-600 dark:hover:bg-red-700 text-white rounded-xl text-xs font-black uppercase tracking-wider border-2 border-[#0A1128] dark:border-slate-700 shadow-[4px_4px_0px_#E31B23] dark:shadow-[4px_4px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#E31B23] dark:hover:shadow-[2px_2px_0px_#000000] transition-all"
             >
               <span>Lihat Semua Galeri ({moments.length})</span>
               <ArrowRight className="w-4 h-4" />
@@ -311,10 +311,10 @@ export default async function HomePage() {
               <Link
                 key={mom.id}
                 href="/galeri"
-                className="bg-white border-3 border-[#0A1128] rounded-3xl overflow-hidden shadow-[6px_6px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[8px_8px_0px_#E31B23] transition-all group flex flex-col justify-between"
+                className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl overflow-hidden shadow-[6px_6px_0px_#0A1128] dark:shadow-[6px_6px_0px_#000000] hover:-translate-y-1 hover:shadow-[8px_8px_0px_#E31B23] dark:hover:shadow-[8px_8px_0px_#E31B23] transition-all group flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative aspect-video w-full overflow-hidden bg-slate-950 border-b-3 border-[#0A1128]">
+                  <div className="relative aspect-video w-full overflow-hidden bg-slate-950 border-b-3 border-[#0A1128] dark:border-slate-700">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={mom.imageUrl}
@@ -327,19 +327,19 @@ export default async function HomePage() {
                   </div>
 
                   <div className="p-5">
-                    <h3 className="font-black text-lg text-[#0A1128] group-hover:text-[#E31B23] transition-colors line-clamp-1 mb-2 leading-snug">
+                    <h3 className="font-black text-lg text-[#0A1128] dark:text-white group-hover:text-[#E31B23] dark:group-hover:text-red-400 transition-colors line-clamp-1 mb-2 leading-snug">
                       {mom.title}
                     </h3>
-                    <p className="text-xs text-slate-600 font-semibold line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 font-semibold line-clamp-2 leading-relaxed">
                       {mom.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-5 pb-5 pt-2 flex items-center justify-between text-xs text-slate-500 border-t border-slate-100">
-                  <span className="font-extrabold text-slate-700 truncate">{mom.author.displayName || mom.author.username}</span>
-                  <span className="flex items-center gap-1.5 text-[#E31B23] font-black px-2.5 py-1 bg-red-50 rounded-lg border border-red-200">
-                    <Heart className="w-3.5 h-3.5 fill-[#E31B23]" />
+                <div className="px-5 pb-5 pt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
+                  <span className="font-extrabold text-slate-700 dark:text-slate-300 truncate">{mom.author.displayName || mom.author.username}</span>
+                  <span className="flex items-center gap-1.5 text-[#E31B23] dark:text-red-400 font-black px-2.5 py-1 bg-red-50 dark:bg-red-950/40 rounded-lg border border-red-200 dark:border-red-900/50">
+                    <Heart className="w-3.5 h-3.5 fill-[#E31B23] dark:fill-red-400" />
                     {mom.likes}
                   </span>
                 </div>
@@ -352,13 +352,13 @@ export default async function HomePage() {
       {/* 5. ROLE HIERARCHY SHOWCASE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-          <span className="text-xs font-black tracking-widest text-[#E31B23] uppercase bg-red-50 border-2 border-red-200 px-3 py-1 rounded-full">
+          <span className="text-xs font-black tracking-widest text-[#E31B23] dark:text-red-400 uppercase bg-red-50 dark:bg-red-950/50 border-2 border-red-200 dark:border-red-900/50 px-3 py-1 rounded-full">
             Discord RBAC Matrix
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#0A1128] tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0A1128] dark:text-white tracking-tight">
             Hirarki & Peran Warga
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 font-semibold">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-semibold">
             Status peran yang otomatis disinkronisasi langsung dari server Discord SuperMalazz.
           </p>
         </div>
@@ -366,25 +366,25 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* CHEF CARD */}
-          <div className="bg-white border-3 border-[#0A1128] rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#F59E0B] transition-all flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#0A1128] font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] rounded-bl-2xl tracking-wider shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#F59E0B] transition-all flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#0A1128] font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 1 Puncak
             </div>
 
             <div>
-              <div className="w-16 h-16 bg-[#FEF3C7] border-3 border-[#0A1128] rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128]">
-                <Sparkles className="w-8 h-8 text-[#D97706]" />
+              <div className="w-16 h-16 bg-[#FEF3C7] dark:bg-amber-950/40 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+                <Sparkles className="w-8 h-8 text-[#D97706] dark:text-amber-400" />
               </div>
-              <h3 className="text-3xl font-black text-[#0A1128] mb-1">CHEF</h3>
-              <p className="text-xs font-black text-[#D97706] uppercase tracking-wider mb-4">
+              <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">CHEF</h3>
+              <p className="text-xs font-black text-[#D97706] dark:text-amber-400 uppercase tracking-wider mb-4">
                 The Masterminds & Founder
               </p>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
                 Penjaga ketertiban dan pengarah visi komunitas. Memiliki kontrol penuh atas server, broadcast pengumuman resmi (*Mini CMS*), serta tata kelola server.
               </p>
             </div>
 
-            <div className="border-t-2 border-slate-100 pt-5 space-y-2.5 text-xs font-black text-slate-700">
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
                 <span>Publish & Pin Pengumuman Resmi (CMS)</span>
@@ -397,25 +397,25 @@ export default async function HomePage() {
           </div>
 
           {/* SIRKEL CARD */}
-          <div className="bg-white border-3 border-[#0A1128] rounded-3xl p-7 shadow-[7px_7px_0px_#E31B23] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#E31B23] transition-all flex flex-col justify-between relative overflow-hidden ring-3 ring-[#E31B23]">
-            <div className="absolute top-0 right-0 bg-[#E31B23] text-white font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] rounded-bl-2xl tracking-wider shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#E31B23] dark:shadow-[7px_7px_0px_#E31B23] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#E31B23] transition-all flex flex-col justify-between relative overflow-hidden ring-3 ring-[#E31B23]">
+            <div className="absolute top-0 right-0 bg-[#E31B23] text-white font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 2 Inti
             </div>
 
             <div>
-              <div className="w-16 h-16 bg-red-50 border-3 border-[#0A1128] rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128]">
-                <Flame className="w-8 h-8 text-[#E31B23]" />
+              <div className="w-16 h-16 bg-red-50 dark:bg-red-950/40 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+                <Flame className="w-8 h-8 text-[#E31B23] dark:text-red-400" />
               </div>
-              <h3 className="text-3xl font-black text-[#0A1128] mb-1">SIRKEL</h3>
-              <p className="text-xs font-black text-[#E31B23] uppercase tracking-wider mb-4">
+              <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">SIRKEL</h3>
+              <p className="text-xs font-black text-[#E31B23] dark:text-red-400 uppercase tracking-wider mb-4">
                 The Homies & Mabar Host
               </p>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
                 Member reguler aktif dan inisiator keseruan. Mereka yang sering ngajak nongkrong, meramaikan voice channel, dan mengabadikan momen seru di galeri.
               </p>
             </div>
 
-            <div className="border-t-2 border-slate-100 pt-5 space-y-2.5 text-xs font-black text-slate-700">
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#E31B23] shrink-0" />
                 <span>Ajak Mabar di Discord & Unggah Momen</span>
@@ -428,25 +428,25 @@ export default async function HomePage() {
           </div>
 
           {/* MALAZZ CARD */}
-          <div className="bg-white border-3 border-[#0A1128] rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#64748B] transition-all flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-slate-200 text-[#0A1128] font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] rounded-bl-2xl tracking-wider shadow-sm">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#64748B] transition-all flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-slate-200 dark:bg-slate-800 text-[#0A1128] dark:text-slate-200 font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 3 Umum
             </div>
 
             <div>
-              <div className="w-16 h-16 bg-slate-100 border-3 border-[#0A1128] rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128]">
-                <Coffee className="w-8 h-8 text-[#64748B]" />
+              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+                <Coffee className="w-8 h-8 text-[#64748B] dark:text-slate-400" />
               </div>
-              <h3 className="text-3xl font-black text-[#0A1128] mb-1">MALAZZ</h3>
-              <p className="text-xs font-black text-[#64748B] uppercase tracking-wider mb-4">
+              <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">MALAZZ</h3>
+              <p className="text-xs font-black text-[#64748B] dark:text-slate-400 uppercase tracking-wider mb-4">
                 The Chillers & Enjoyers
               </p>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
                 Basis massa santai. Bebas mampir kapan saja, membaca pengumuman publik, ikutan nimbrung ngobrol di voice channel, dan meramaikan galeri.
               </p>
             </div>
 
-            <div className="border-t-2 border-slate-100 pt-5 space-y-2.5 text-xs font-black text-slate-700">
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-slate-500 shrink-0" />
                 <span>Akses Publik Semua Halaman Portal</span>
@@ -464,14 +464,14 @@ export default async function HomePage() {
       {/* 6. TONGKRONGAN RULES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-red-100 border-2 border-[#0A1128] rounded-full text-xs font-black text-[#E31B23] uppercase tracking-wider shadow-[2px_2px_0px_#0A1128]">
-            <ShieldAlert className="w-4 h-4 text-[#E31B23]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-red-100 dark:bg-red-950/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-full text-xs font-black text-[#E31B23] dark:text-red-400 uppercase tracking-wider shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+            <ShieldAlert className="w-4 h-4 text-[#E31B23] dark:text-red-400" />
             <span>Kode Etik & Regulasi Server</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-[#0A1128] tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-[#0A1128] dark:text-white tracking-tight">
             9 Aturan Server SuperMalazz
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 font-semibold max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 font-semibold max-w-xl mx-auto">
             Demi kenyamanan dan ketertiban bersama di server Discord maupun saat mabar, seluruh warga wajib menaati 9 aturan utama berikut.
           </p>
         </div>
@@ -480,33 +480,33 @@ export default async function HomePage() {
           {COMMUNITY_RULES.map((rule) => (
             <div
               key={rule.no}
-              className="bg-white border-3 border-[#0A1128] rounded-3xl p-6 shadow-[5px_5px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[7px_7px_0px_#E31B23] transition-all flex flex-col justify-between group"
+              className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] hover:-translate-y-1 hover:shadow-[7px_7px_0px_#E31B23] dark:hover:shadow-[7px_7px_0px_#E31B23] transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-red-50 border-2 border-[#0A1128] rounded-2xl flex items-center justify-center font-black text-base text-[#E31B23] shadow-[2px_2px_0px_#0A1128] group-hover:bg-[#E31B23] group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 bg-red-50 dark:bg-red-950/40 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center font-black text-base text-[#E31B23] dark:text-red-400 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] group-hover:bg-[#E31B23] group-hover:text-white transition-colors">
                     {rule.no}
                   </div>
-                  <span className={`px-2.5 py-1 border border-[#0A1128] rounded-lg text-[10px] font-black uppercase tracking-wider ${rule.badgeClass}`}>
+                  <span className={`px-2.5 py-1 border border-[#0A1128] dark:border-slate-700 rounded-lg text-[10px] font-black uppercase tracking-wider ${rule.badgeClass} dark:bg-slate-800 dark:text-slate-200`}>
                     {rule.tag}
                   </span>
                 </div>
 
-                <h3 className="font-black text-lg text-[#0A1128] mb-2 leading-snug group-hover:text-[#E31B23] transition-colors">
+                <h3 className="font-black text-lg text-[#0A1128] dark:text-white mb-2 leading-snug group-hover:text-[#E31B23] dark:group-hover:text-red-400 transition-colors">
                   {rule.title}
                 </h3>
 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold">
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-semibold">
                   {rule.desc}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-slate-400">
-                <span className="flex items-center gap-1.5 text-slate-500">
+              <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] font-bold text-slate-400">
+                <span className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
                   <span className="w-2 h-2 rounded-full bg-[#E31B23]"></span>
                   Aturan Wajib Server
                 </span>
-                <span className="text-[10px] font-black uppercase text-[#0A1128] px-1.5 py-0.5 bg-slate-100 rounded border border-slate-300">
+                <span className="text-[10px] font-black uppercase text-[#0A1128] dark:text-slate-300 px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-700">
                   Rule {rule.no}
                 </span>
               </div>
@@ -515,14 +515,14 @@ export default async function HomePage() {
         </div>
 
         {/* Notice & Enforcement Box */}
-        <div className="mt-12 max-w-4xl mx-auto p-5 sm:p-6 bg-[#FFFBEB] border-3 border-[#0A1128] rounded-3xl shadow-[5px_5px_0px_#0A1128] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        <div className="mt-12 max-w-4xl mx-auto p-5 sm:p-6 bg-[#FFFBEB] dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <div className="flex items-start sm:items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#F59E0B] border-2 border-[#0A1128] flex items-center justify-center text-xl shrink-0 shadow-[3px_3px_0px_#0A1128]">
+            <div className="w-12 h-12 rounded-2xl bg-[#F59E0B] border-2 border-[#0A1128] dark:border-slate-700 flex items-center justify-center text-xl shrink-0 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000]">
               ⚠️
             </div>
             <div>
-              <h4 className="text-base font-black text-[#0A1128]">Sanksi Pelanggaran Regulasi</h4>
-              <p className="text-xs sm:text-sm text-slate-700 font-medium mt-0.5 leading-relaxed">
+              <h4 className="text-base font-black text-[#0A1128] dark:text-white">Sanksi Pelanggaran Regulasi</h4>
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium mt-0.5 leading-relaxed">
                 Pelanggaran terhadap 9 aturan di atas akan ditindak dengan sanksi bertingkat: <strong>Warn</strong>, <strong>Timeout / Mute</strong>, <strong>Kick</strong>, hingga <strong>Ban Permanen</strong> oleh CHEF & tim pengurus.
               </p>
             </div>
@@ -531,7 +531,7 @@ export default async function HomePage() {
             href={inviteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-[#0A1128] hover:bg-slate-900 text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#E31B23] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#E31B23] shrink-0 transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-[#0A1128] hover:bg-slate-900 dark:bg-red-600 dark:hover:bg-red-700 text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#E31B23] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#E31B23] shrink-0 transition-all"
           >
             <span>Buka Discord</span>
             <ExternalLink className="w-4 h-4" />

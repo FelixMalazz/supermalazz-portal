@@ -156,7 +156,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
   return (
     <div>
       {/* Search Bar & Sort Controls */}
-      <div className="bg-white border-2 border-[#0A1128] rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#0A1128] mb-6 space-y-4">
+      <div className="bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-4 sm:p-5 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000] mb-6 space-y-4">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
           {/* Search Input */}
           <div className="relative flex-1">
@@ -166,12 +166,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
               placeholder="Cari momen berdasarkan judul, pengunggah, atau keterangan..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-9 py-2.5 bg-slate-50 border-2 border-[#0A1128] rounded-xl text-xs sm:text-sm font-bold text-[#0A1128] placeholder:text-slate-400 focus:outline-hidden focus:bg-white focus:ring-2 focus:ring-[#E31B23] shadow-[2px_2px_0px_#0A1128] transition-all"
+              className="w-full pl-10 pr-9 py-2.5 bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs sm:text-sm font-bold text-[#0A1128] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-hidden focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-[#E31B23] shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] transition-all"
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-slate-200 text-slate-500 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -183,28 +183,28 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="appearance-none pl-8 pr-7 py-2.5 bg-slate-50 hover:bg-slate-100 border-2 border-[#0A1128] rounded-xl text-xs font-black text-[#0A1128] shadow-[2px_2px_0px_#0A1128] cursor-pointer focus:outline-hidden w-full sm:w-auto"
+              className="appearance-none pl-8 pr-7 py-2.5 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-black text-[#0A1128] dark:text-white shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] cursor-pointer focus:outline-hidden w-full sm:w-auto"
             >
               <option value="NEWEST">Terbaru (Tanggal Foto)</option>
               <option value="OLDEST">Terlama</option>
               <option value="MOST_LIKED">Paling Banyak Disukai ❤️</option>
             </select>
-            <ArrowUpDown className="w-3.5 h-3.5 text-slate-600 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ArrowUpDown className="w-3.5 h-3.5 text-slate-600 dark:text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t-2 border-slate-100 pt-3">
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t-2 border-slate-100 dark:border-slate-800 pt-3">
           <button
             onClick={() => setFilter('ALL')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'ALL'
-                ? 'bg-[#0A1128] text-white border-[#0A1128] shadow-[2px_2px_0px_#E31B23]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#0A1128] dark:bg-red-600 text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#E31B23] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>Semua Momen</span>
-            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'ALL' ? 'bg-[#E31B23] text-white' : 'bg-slate-100 text-slate-600'}`}>
+            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'ALL' ? 'bg-[#E31B23] dark:bg-white text-white dark:text-red-600' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
               {counts.all}
             </span>
           </button>
@@ -213,12 +213,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
             onClick={() => setFilter('MABAR')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'MABAR'
-                ? 'bg-[#E31B23] text-white border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#E31B23] text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>🎮 Mabar Seru</span>
-            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'MABAR' ? 'bg-white text-[#E31B23]' : 'bg-slate-100 text-slate-600'}`}>
+            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'MABAR' ? 'bg-white text-[#E31B23]' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
               {counts.mabar}
             </span>
           </button>
@@ -227,12 +227,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
             onClick={() => setFilter('CHAOS')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'CHAOS'
-                ? 'bg-purple-700 text-white border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-purple-700 text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>💥 Chaos & Lucu</span>
-            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'CHAOS' ? 'bg-white text-purple-700' : 'bg-slate-100 text-slate-600'}`}>
+            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'CHAOS' ? 'bg-white text-purple-700' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
               {counts.chaos}
             </span>
           </button>
@@ -241,12 +241,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
             onClick={() => setFilter('VOICE')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'VOICE'
-                ? 'bg-sky-700 text-white border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-sky-700 text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>🎧 Voice & Nobar</span>
-            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'VOICE' ? 'bg-white text-sky-700' : 'bg-slate-100 text-slate-600'}`}>
+            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'VOICE' ? 'bg-white text-sky-700' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
               {counts.voice}
             </span>
           </button>
@@ -255,12 +255,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
             onClick={() => setFilter('TOURNAMENT')}
             className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border-2 text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer ${
               filter === 'TOURNAMENT'
-                ? 'bg-[#F59E0B] text-[#0A1128] border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                ? 'bg-[#F59E0B] text-[#0A1128] border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500'
             }`}
           >
             <span>🏆 Turnamen</span>
-            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'TOURNAMENT' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 text-slate-600'}`}>
+            <span className={`px-1.5 py-0.2 rounded-md text-[10px] font-black ${filter === 'TOURNAMENT' ? 'bg-[#0A1128] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>
               {counts.tournament}
             </span>
           </button>
@@ -269,10 +269,10 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
 
       {/* Grid of Moments */}
       {filteredMoments.length === 0 ? (
-        <div className="text-center py-16 px-4 bg-white border-2 border-[#0A1128] rounded-2xl shadow-[4px_4px_0px_#0A1128]">
-          <ImageIcon className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-          <h3 className="font-black text-lg text-[#0A1128]">Belum Ada Momen Tersimpan</h3>
-          <p className="text-sm text-slate-500 max-w-sm mx-auto mt-1 font-medium">
+        <div className="text-center py-16 px-4 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
+          <ImageIcon className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+          <h3 className="font-black text-lg text-[#0A1128] dark:text-white">Belum Ada Momen Tersimpan</h3>
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto mt-1 font-medium">
             {filter !== 'ALL'
               ? 'Belum ada foto/klip di kategori ini. Coba pilih tab lain atau unggah momen baru!'
               : 'Galeri masih kosong. Anda bisa mengunggah momen pertama sekarang.'}
@@ -280,7 +280,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
           {filter !== 'ALL' && (
             <button
               onClick={() => setFilter('ALL')}
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-[#0A1128] text-xs font-black rounded-xl border-2 border-[#0A1128] shadow-[2px_2px_0px_#0A1128] transition-all cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#0A1128] dark:text-white text-xs font-black rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer"
             >
               Lihat Semua Kategori
             </button>
@@ -295,11 +295,11 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
               <div
                 key={item.id}
                 onClick={() => setSelectedMoment(item)}
-                className="bg-white border-2 border-[#0A1128] rounded-2xl overflow-hidden shadow-[4px_4px_0px_#0A1128] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#E31B23] transition-all cursor-pointer flex flex-col justify-between group"
+                className="bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl overflow-hidden shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000] hover:-translate-y-1 hover:shadow-[6px_6px_0px_#E31B23] dark:hover:shadow-[6px_6px_0px_#E31B23] transition-all cursor-pointer flex flex-col justify-between group"
               >
                 <div>
                   {/* Image Container */}
-                  <div className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b-2 border-[#0A1128]">
+                  <div className="relative aspect-video w-full overflow-hidden bg-slate-900 border-b-2 border-[#0A1128] dark:border-slate-700">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={item.imageUrl}
@@ -332,21 +332,21 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
 
                   {/* Content */}
                   <div className="p-5">
-                    <h3 className="font-black text-lg text-[#0A1128] mb-2 leading-snug group-hover:text-[#E31B23] transition-colors line-clamp-2">
+                    <h3 className="font-black text-lg text-[#0A1128] dark:text-white mb-2 leading-snug group-hover:text-[#E31B23] dark:group-hover:text-red-400 transition-colors line-clamp-2">
                       {item.title}
                     </h3>
 
                     {item.description && (
-                      <p className="text-xs text-slate-600 font-medium line-clamp-2 leading-relaxed mb-3">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 font-medium line-clamp-2 leading-relaxed mb-3">
                         {item.description}
                       </p>
                     )}
 
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500">
+                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500 dark:text-slate-400">
                       <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       <span>
                         {item.capturedAt ? 'Diambil:' : 'Diunggah:'}{' '}
-                        <strong className="text-slate-700">
+                        <strong className="text-slate-700 dark:text-slate-300">
                           {new Date(item.capturedAt || item.createdAt).toLocaleDateString('id-ID', {
                             day: 'numeric',
                             month: 'long',
@@ -359,7 +359,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 </div>
 
                 {/* Card Footer */}
-                <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-slate-100 text-xs">
+                <div className="px-5 pb-5 pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 text-xs">
                   
                   {/* Author Info */}
                   <div className="flex items-center gap-2">
@@ -367,9 +367,9 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                     <img
                       src={item.author.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'}
                       alt={item.author.username}
-                      className="w-5 h-5 rounded-full object-cover border border-slate-300"
+                      className="w-5 h-5 rounded-full object-cover border border-slate-300 dark:border-slate-600"
                     />
-                    <span className="font-bold text-slate-600 truncate max-w-[100px]">
+                    <span className="font-bold text-slate-600 dark:text-slate-300 truncate max-w-[100px]">
                       {item.author.displayName || item.author.username}
                     </span>
                   </div>
@@ -380,12 +380,12 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                       onClick={(e) => handleLike(item.id, e)}
                       className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border-2 font-black transition-all cursor-pointer ${
                         isLiked
-                          ? 'bg-red-50 text-[#E31B23] border-[#E31B23] shadow-[1px_1px_0px_#E31B23]'
-                          : 'bg-white text-slate-700 border-[#0A1128] hover:bg-slate-50'
+                          ? 'bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-[#E31B23] shadow-[1px_1px_0px_#E31B23]'
+                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-[#0A1128] dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
                       }`}
                     >
                       <Heart
-                        className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#E31B23] text-[#E31B23]' : 'text-slate-500'}`}
+                        className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#E31B23] text-[#E31B23]' : 'text-slate-500 dark:text-slate-400'}`}
                       />
                       <span>{item.likes}</span>
                     </button>
@@ -393,9 +393,9 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                     {/* Comment Count indicator */}
                     <div
                       title={`${item.comments?.length || 0} Komentar`}
-                      className="flex items-center gap-1 px-2 py-1 rounded-lg border-2 border-[#0A1128] bg-slate-50 text-slate-700 text-xs font-black shadow-[1px_1px_0px_#0A1128]"
+                      className="flex items-center gap-1 px-2 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-black shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]"
                     >
-                      <MessageSquare className="w-3.5 h-3.5 text-slate-500" />
+                      <MessageSquare className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                       <span>{item.comments?.length || 0}</span>
                     </div>
 
@@ -406,7 +406,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                         setDeletingMoment(item);
                       }}
                       title="Hapus Momen Ini"
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg border-2 border-[#0A1128] bg-rose-50 text-rose-700 hover:bg-rose-100 font-black text-xs shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all cursor-pointer"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 font-black text-xs shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                       <span className="hidden sm:inline">Hapus</span>
@@ -423,15 +423,15 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
       {/* Lightbox Modal */}
       {selectedMoment && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/80 backdrop-blur-sm animate-in fade-in duration-150 overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/80 dark:bg-black/80 backdrop-blur-sm animate-in fade-in duration-150 overflow-y-auto"
           onClick={() => setSelectedMoment(null)}
         >
           <div
-            className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] overflow-hidden my-8 max-h-[92vh] flex flex-col"
+            className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] overflow-hidden my-8 max-h-[92vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Image */}
-            <div className="relative aspect-video w-full bg-slate-950 border-b-3 border-[#0A1128] shrink-0">
+            <div className="relative aspect-video w-full bg-slate-950 border-b-3 border-[#0A1128] dark:border-slate-700 shrink-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={selectedMoment.imageUrl}
@@ -452,8 +452,8 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 <div className="flex items-center gap-2 flex-wrap">
                   {getCategoryBadge(selectedMoment.category)}
                   
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-[#0A1128] rounded-lg text-xs font-black text-amber-900 shadow-xs">
-                    <Calendar className="w-3.5 h-3.5 text-amber-600" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 dark:bg-amber-950/40 border border-[#0A1128] dark:border-slate-700 rounded-lg text-xs font-black text-amber-900 dark:text-amber-300 shadow-xs">
+                    <Calendar className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                     <span>
                       {selectedMoment.capturedAt ? 'Foto Diambil: ' : 'Diunggah: '}
                       {new Date(selectedMoment.capturedAt || selectedMoment.createdAt).toLocaleDateString('id-ID', {
@@ -476,19 +476,19 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-slate-600">Diabadikan oleh:</span>
-                  <span className="text-xs font-black text-[#0A1128]">
+                  <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Diabadikan oleh:</span>
+                  <span className="text-xs font-black text-[#0A1128] dark:text-white">
                     {selectedMoment.author.displayName || selectedMoment.author.username}
                   </span>
                 </div>
               </div>
 
               <div>
-                <h2 className="text-2xl font-black text-[#0A1128] mb-1 leading-snug">
+                <h2 className="text-2xl font-black text-[#0A1128] dark:text-white mb-1 leading-snug">
                   {selectedMoment.title}
                 </h2>
                 {selectedMoment.description && (
-                  <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
                     {selectedMoment.description}
                   </p>
                 )}
@@ -498,7 +498,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
               <div className="flex items-center justify-between pt-2">
                 <button
                   onClick={() => setDeletingMoment(selectedMoment)}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 text-rose-700 hover:bg-rose-100 border-2 border-[#0A1128] rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                   <span>Hapus Momen</span>
@@ -506,17 +506,17 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
 
                 <button
                   onClick={(e) => handleLike(selectedMoment.id, e)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 text-[#E31B23] border-2 border-[#0A1128] rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
                 >
-                  <Heart className="w-4 h-4 fill-[#E31B23]" />
+                  <Heart className="w-4 h-4 fill-[#E31B23] dark:fill-red-400" />
                   <span>Suka Momen Ini ({selectedMoment.likes})</span>
                 </button>
               </div>
 
               {/* Reaction Bar */}
-              <div className="p-3 bg-slate-50 border-2 border-[#0A1128] rounded-xl space-y-2 shadow-[2px_2px_0px_#0A1128]">
+              <div className="p-3 bg-slate-50 dark:bg-slate-800/80 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl space-y-2 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-black uppercase text-[#0A1128] tracking-wider">
+                  <span className="text-xs font-black uppercase text-[#0A1128] dark:text-white tracking-wider">
                     Reaksi Warga:
                   </span>
                   <span className="text-[10px] font-bold text-slate-400">
@@ -538,7 +538,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
               </div>
 
               {/* Comments Section */}
-              <div className="border-t-2 border-slate-100 pt-4">
+              <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-4">
                 <CommentSection
                   targetId={selectedMoment.id}
                   targetType="moment"
@@ -561,22 +561,22 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
 
       {/* Delete Confirmation Modal */}
       {deletingMoment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/75 backdrop-blur-xs animate-in fade-in duration-100">
-          <div className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-md shadow-[8px_8px_0px_#0A1128] p-6 space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A1128]/75 dark:bg-black/80 backdrop-blur-xs animate-in fade-in duration-100">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl w-full max-w-md shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] p-6 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-rose-100 border-2 border-rose-950 flex items-center justify-center text-rose-600 shrink-0 shadow-[2px_2px_0px_#0A1128]">
+              <div className="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-950/60 border-2 border-rose-950 dark:border-rose-700 flex items-center justify-center text-rose-600 dark:text-rose-400 shrink-0 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                 <AlertTriangle className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-black text-lg text-[#0A1128]">Hapus Momen Ini?</h4>
-                <p className="text-xs text-slate-500 font-semibold">
+                <h4 className="font-black text-lg text-[#0A1128] dark:text-white">Hapus Momen Ini?</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                   Foto momen ini akan dihapus secara permanen dari galeri.
                 </p>
               </div>
             </div>
 
-            <div className="p-3 bg-slate-50 border-2 border-slate-200 rounded-xl">
-              <p className="text-xs font-bold text-[#0A1128] line-clamp-2">
+            <div className="p-3 bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-xl">
+              <p className="text-xs font-bold text-[#0A1128] dark:text-slate-200 line-clamp-2">
                 &ldquo;{deletingMoment.title}&rdquo;
               </p>
             </div>
@@ -586,7 +586,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 type="button"
                 onClick={() => setDeletingMoment(null)}
                 disabled={isDeleting}
-                className="px-4 py-2 text-xs font-black uppercase text-slate-600 hover:text-slate-900 border-2 border-slate-300 hover:border-[#0A1128] rounded-xl transition-all cursor-pointer"
+                className="px-4 py-2 text-xs font-black uppercase text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border-2 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500 rounded-xl transition-all cursor-pointer"
               >
                 Batal
               </button>
@@ -594,7 +594,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 type="button"
                 onClick={handleConfirmDelete}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-2 px-5 py-2 bg-[#E31B23] hover:bg-[#b9151c] text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all disabled:opacity-50 cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 bg-[#E31B23] hover:bg-[#b9151c] text-white text-xs font-black uppercase tracking-wider rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all disabled:opacity-50 cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
                 <span>{isDeleting ? 'Menghapus...' : 'Ya, Hapus Momen'}</span>

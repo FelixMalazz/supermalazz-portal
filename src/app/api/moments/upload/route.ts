@@ -8,6 +8,13 @@ import { createMoment } from '@/lib/gallery';
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Harap login dengan akun Discord terlebih dahulu untuk mengunggah foto momen.' },
+        { status: 401 }
+      );
+    }
+
     const formData = await request.formData();
 
     // Get all uploaded files
@@ -37,11 +44,11 @@ export async function POST(request: NextRequest) {
     const defaultCategory = (formData.get('defaultCategory') as string) || 'MABAR';
 
     // Author info
-    const authorId = user?.id || '10001';
-    const authorUsername = user?.username || 'SuperMalazz';
-    const authorDisplayName = user?.displayName || 'SuperMalazz Admin';
-    const authorAvatar = user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
-    const authorRole = (user?.role as any) || 'CHEF';
+    const authorId = user.id;
+    const authorUsername = user.username;
+    const authorDisplayName = user.displayName || user.username;
+    const authorAvatar = user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
+    const authorRole = user.role;
 
     // Check storage mode: Vercel Blob > Base64 fallback (on serverless) > Local filesystem
     const hasBlobToken = Boolean(process.env.BLOB_READ_WRITE_TOKEN);

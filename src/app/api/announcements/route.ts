@@ -15,6 +15,13 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: 'Harap login dengan akun Discord terlebih dahulu untuk membuat pengumuman.' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const { title, content, category, isPinned } = body;
 
@@ -22,11 +29,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Judul dan konten pengumuman wajib diisi.' }, { status: 400 });
     }
 
-    const authorId = user?.id || '10001';
-    const authorUsername = user?.username || 'ChefMaster';
-    const authorDisplayName = user?.displayName || 'Bang Chef (Founder)';
-    const authorRole = (user?.role as UserRole) || 'CHEF';
-    const authorAvatar = user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
+    const authorId = user.id;
+    const authorUsername = user.username;
+    const authorDisplayName = user.displayName || user.username;
+    const authorRole = user.role as UserRole;
+    const authorAvatar = user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150';
 
     const newAnnouncement = await createAnnouncement({
       title,

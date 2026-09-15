@@ -11,7 +11,8 @@ import {
   Calendar, 
   CheckCircle2, 
   Trash2, 
-  Image as ImageIcon
+  Image as ImageIcon,
+  LogIn
 } from 'lucide-react';
 import { showToast } from '@/components/Toast';
 
@@ -46,9 +47,13 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
 
   if (!canAdd) {
     return (
-      <div className="inline-flex items-center gap-2 px-3 py-2 bg-slate-100 border-2 border-slate-300 rounded-xl text-xs font-bold text-slate-500">
-        <span>🔒 Hanya role CHEF & SIRKEL yang dapat mengunggah momen.</span>
-      </div>
+      <a
+        href="/api/auth/discord/login"
+        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 bg-[#5865F2] hover:bg-[#4752C4] text-white font-black text-xs sm:text-sm rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all cursor-pointer shrink-0"
+      >
+        <LogIn className="w-4 h-4" />
+        <span>Login Discord untuk Unggah Momen</span>
+      </a>
     );
   }
 
@@ -227,7 +232,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-sm rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all cursor-pointer"
+        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-sm rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all cursor-pointer"
       >
         <Camera className="w-4 h-4" />
         <span>Unggah Momen Tongkrongan</span>
@@ -235,19 +240,19 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
 
       {isOpen && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#0A1128]/80 backdrop-blur-xs overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#0A1128]/80 dark:bg-black/80 backdrop-blur-xs overflow-y-auto"
           onDragEnter={handleDragEnter}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
           <div 
-            className="bg-white border-3 border-[#0A1128] rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
+            className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl w-full max-w-3xl shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-150 flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             
             {/* Header Modal */}
-            <div className="flex items-center justify-between px-6 py-4 bg-[#0A1128] text-white shrink-0">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#0A1128] dark:bg-slate-950 text-white shrink-0 border-b-2 border-[#0A1128] dark:border-slate-800">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-[#E31B23] border border-white flex items-center justify-center shadow-[2px_2px_0px_white]">
                   <UploadCloud className="w-4 h-4 text-white" />
@@ -271,7 +276,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
             {/* Form Body (Scrollable) */}
             <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-6 flex-1">
               {errorMsg && (
-                <div className="flex items-center gap-2 p-3 bg-red-50 border-2 border-red-300 text-red-700 text-xs font-bold rounded-xl">
+                <div className="flex items-center gap-2 p-3 bg-red-50 dark:bg-red-950/50 border-2 border-red-300 dark:border-red-900 text-red-700 dark:text-red-400 text-xs font-bold rounded-xl">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
@@ -284,10 +289,10 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`border-3 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all cursor-pointer group shadow-[3px_3px_0px_#0A1128] ${
+                className={`border-3 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all cursor-pointer group shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] ${
                   isDragging
-                    ? 'border-[#E31B23] bg-red-50 ring-4 ring-red-200 scale-[1.01]'
-                    : 'border-[#0A1128] bg-slate-50 hover:bg-red-50/40 hover:border-[#E31B23]'
+                    ? 'border-[#E31B23] bg-red-50 dark:bg-red-950/40 ring-4 ring-red-200 dark:ring-red-900/50 scale-[1.01]'
+                    : 'border-[#0A1128] dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 hover:bg-red-50/40 dark:hover:bg-red-950/20 hover:border-[#E31B23]'
                 }`}
               >
                 <input
@@ -299,33 +304,33 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                   className="hidden"
                 />
 
-                <div className={`w-14 h-14 rounded-2xl bg-white border-2 border-[#0A1128] flex items-center justify-center mx-auto mb-3 shadow-[3px_3px_0px_#0A1128] transition-all ${
+                <div className={`w-14 h-14 rounded-2xl bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 flex items-center justify-center mx-auto mb-3 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] transition-all ${
                   isDragging ? 'scale-110 shadow-[2px_2px_0px_#E31B23] animate-bounce' : 'group-hover:scale-105'
                 }`}>
                   <UploadCloud className="w-7 h-7 text-[#E31B23]" />
                 </div>
 
-                <h4 className="font-black text-base text-[#0A1128] group-hover:text-[#E31B23] transition-colors">
+                <h4 className="font-black text-base text-[#0A1128] dark:text-white group-hover:text-[#E31B23] transition-colors">
                   {isDragging
                     ? '⚡ Lepaskan foto Anda di sini!'
                     : 'Seret & Letakkan (Drag and Drop) foto di sini, atau klik untuk memilih'}
                 </h4>
-                <p className="text-xs text-slate-500 font-semibold mt-1">
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-1">
                   Mendukung format PNG, JPG, JPEG, WEBP. Bebas memilih beberapa foto sekaligus dari laptop!
                 </p>
 
-                <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-[#0A1128] rounded-lg text-[11px] font-bold text-slate-700 shadow-xs">
+                <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-white dark:bg-slate-800 border border-[#0A1128] dark:border-slate-700 rounded-lg text-[11px] font-bold text-slate-700 dark:text-slate-300 shadow-xs">
                   <span>📅 Tanggal foto diambil akan terdeteksi otomatis dari file Anda.</span>
                 </div>
               </div>
 
               {/* Batch Global Category Selector */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-slate-100 border-2 border-[#0A1128] rounded-2xl shadow-[2px_2px_0px_#0A1128]">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 bg-slate-100 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                 <div>
-                  <span className="text-xs font-black uppercase text-[#0A1128] block">
+                  <span className="text-xs font-black uppercase text-[#0A1128] dark:text-white block">
                     Kategori Default (Diterapkan ke semua foto)
                   </span>
-                  <span className="text-[11px] text-slate-500 font-medium">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                     Bisa diubah secara individual per foto di daftar bawah.
                   </span>
                 </div>
@@ -343,8 +348,8 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                       onClick={() => handleApplyCategoryToAll(c.key as any)}
                       className={`px-3 py-1.5 rounded-xl border text-xs font-black cursor-pointer transition-all ${
                         globalCategory === c.key
-                          ? 'bg-[#E31B23] text-white border-[#0A1128] shadow-[2px_2px_0px_#0A1128]'
-                          : 'bg-white text-slate-700 border-slate-300 hover:border-[#0A1128]'
+                          ? 'bg-[#E31B23] text-white border-[#0A1128] dark:border-slate-700 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]'
+                          : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600 hover:border-[#0A1128]'
                       }`}
                     >
                       {c.label}
@@ -357,15 +362,15 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
               {selectedItems.length > 0 ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-black uppercase tracking-wider text-[#0A1128] flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span className="text-xs font-black uppercase tracking-wider text-[#0A1128] dark:text-white flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Daftar Foto Siap Unggah ({selectedItems.length})</span>
                     </span>
 
                     <button
                       type="button"
                       onClick={() => setSelectedItems([])}
-                      className="text-xs font-black text-red-600 hover:underline cursor-pointer"
+                      className="text-xs font-black text-red-600 dark:text-red-400 hover:underline cursor-pointer"
                     >
                       Hapus Semua
                     </button>
@@ -375,10 +380,10 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                     {selectedItems.map((item, idx) => (
                       <div
                         key={item.id}
-                        className="bg-white border-2 border-[#0A1128] rounded-2xl p-3.5 sm:p-4 shadow-[3px_3px_0px_#0A1128] flex flex-col sm:flex-row items-start gap-4 transition-all"
+                        className="bg-white dark:bg-slate-800/90 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl p-3.5 sm:p-4 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] flex flex-col sm:flex-row items-start gap-4 transition-all"
                       >
                         {/* Thumbnail */}
-                        <div className="relative w-full sm:w-32 h-24 sm:h-24 rounded-xl overflow-hidden bg-slate-900 border-2 border-[#0A1128] shrink-0 shadow-xs">
+                        <div className="relative w-full sm:w-32 h-24 sm:h-24 rounded-xl overflow-hidden bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 shrink-0 shadow-xs">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={item.previewUrl}
@@ -398,14 +403,14 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                               value={item.title}
                               onChange={(e) => handleUpdateItem(item.id, 'title', e.target.value)}
                               placeholder="Judul momen..."
-                              className="flex-1 px-3 py-1.5 bg-white border-2 border-[#0A1128] rounded-xl text-xs font-bold text-[#0A1128] focus:outline-hidden focus:ring-2 focus:ring-[#E31B23]"
+                              className="flex-1 px-3 py-1.5 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-bold text-[#0A1128] dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#E31B23]"
                               required
                             />
 
                             <select
                               value={item.category}
                               onChange={(e) => handleUpdateItem(item.id, 'category', e.target.value)}
-                              className="px-2.5 py-1.5 bg-white border-2 border-[#0A1128] rounded-xl text-xs font-bold text-[#0A1128]"
+                              className="px-2.5 py-1.5 bg-white dark:bg-slate-900 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-xs font-bold text-[#0A1128] dark:text-white"
                             >
                               <option value="MABAR">🎮 Mabar</option>
                               <option value="CHAOS">💥 Chaos</option>
@@ -416,8 +421,8 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
 
                           {/* Date captured row */}
                           <div className="flex flex-wrap items-center gap-2 text-xs">
-                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-300 rounded-lg text-amber-900 font-bold">
-                              <Calendar className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700 rounded-lg text-amber-900 dark:text-amber-300 font-bold">
+                              <Calendar className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                               <span>Tanggal File:</span>
                             </div>
                             
@@ -425,11 +430,11 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                               type="date"
                               value={item.capturedAt}
                               onChange={(e) => handleUpdateItem(item.id, 'capturedAt', e.target.value)}
-                              className="px-2.5 py-1 bg-white border border-[#0A1128] rounded-lg text-xs font-bold text-[#0A1128]"
+                              className="px-2.5 py-1 bg-white dark:bg-slate-900 border border-[#0A1128] dark:border-slate-700 rounded-lg text-xs font-bold text-[#0A1128] dark:text-white"
                               title="Tanggal saat foto/screenshot ini dibuat di laptop"
                             />
 
-                            <span className="text-[10px] text-slate-500 font-medium">
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                               (Terdeteksi otomatis dari file)
                             </span>
                           </div>
@@ -440,7 +445,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                             value={item.description}
                             onChange={(e) => handleUpdateItem(item.id, 'description', e.target.value)}
                             placeholder="Cerita / keterangan singkat (opsional)..."
-                            className="w-full px-3 py-1.5 bg-slate-50 border border-slate-300 rounded-xl text-xs text-slate-700 font-medium"
+                            className="w-full px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-xs text-slate-700 dark:text-slate-300 font-medium"
                           />
                         </div>
 
@@ -448,7 +453,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                         <button
                           type="button"
                           onClick={() => handleRemoveItem(item.id)}
-                          className="p-2 text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-300 rounded-xl transition-colors shrink-0 self-end sm:self-center cursor-pointer"
+                          className="p-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 border border-transparent hover:border-rose-300 dark:hover:border-rose-700 rounded-xl transition-colors shrink-0 self-end sm:self-center cursor-pointer"
                           title="Batal pilih foto ini"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -458,17 +463,17 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                   </div>
                 </div>
               ) : (
-                <div className="text-center py-6 px-4 border-2 border-slate-200 rounded-2xl bg-slate-50/60">
-                  <ImageIcon className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                  <p className="text-xs text-slate-500 font-semibold">
+                <div className="text-center py-6 px-4 border-2 border-slate-200 dark:border-slate-700 rounded-2xl bg-slate-50/60 dark:bg-slate-800/40">
+                  <ImageIcon className="w-8 h-8 text-slate-400 dark:text-slate-500 mx-auto mb-2" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                     Belum ada foto yang dipilih. Silakan klik atau seret foto ke kotak di atas.
                   </p>
                 </div>
               )}
 
               {/* Footer Actions */}
-              <div className="flex items-center justify-between pt-4 border-t-2 border-slate-100">
-                <div className="text-xs font-bold text-slate-500">
+              <div className="flex items-center justify-between pt-4 border-t-2 border-slate-100 dark:border-slate-800">
+                <div className="text-xs font-bold text-slate-500 dark:text-slate-400">
                   {selectedItems.length > 0 && (
                     <span>{selectedItems.length} foto siap diunggah ke server</span>
                   )}
@@ -479,7 +484,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                     type="button"
                     onClick={handleClose}
                     disabled={isSubmitting}
-                    className="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900 border-2 border-slate-300 hover:border-[#0A1128] rounded-xl transition-all cursor-pointer"
+                    className="px-4 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border-2 border-slate-300 dark:border-slate-700 hover:border-[#0A1128] dark:hover:border-slate-500 rounded-xl transition-all cursor-pointer"
                   >
                     Batal
                   </button>
@@ -487,7 +492,7 @@ export default function AddMomentModal({ canAdd }: AddMomentModalProps) {
                   <button
                     type="submit"
                     disabled={isSubmitting || selectedItems.length === 0}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-xs uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all disabled:opacity-50 cursor-pointer"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#E31B23] hover:bg-[#c41219] text-white font-black text-xs uppercase tracking-wider rounded-xl border-2 border-[#0A1128] dark:border-slate-700 shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all disabled:opacity-50 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>
