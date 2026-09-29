@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { 
   Flame, 
   Sparkles, 
+  Crown,
   Coffee, 
   ArrowRight, 
   ExternalLink, 
@@ -365,26 +366,43 @@ export default async function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          {/* CHEF CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#0A1128] font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
-              Tier 1 Puncak
-            </div>
-
+          {/* CHEF CARD (TIER 1 - GOLD) */}
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-7 shadow-[7px_7px_0px_#F59E0B] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
             <div>
-              <div className="w-16 h-16 bg-[#FEF3C7] dark:bg-amber-950/40 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
-                <Sparkles className="w-8 h-8 text-[#D97706] dark:text-amber-400" />
+              {/* Header with Icon & Integrated Tier Badge */}
+              <div className="flex items-center justify-between gap-3 mb-5">
+                <div className="w-14 h-14 bg-[#FEF3C7] dark:bg-amber-950/60 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] shrink-0">
+                  <Crown className="w-7 h-7 text-[#D97706] dark:text-amber-400" />
+                </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-[11px] font-black uppercase tracking-wider shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+                  <span>Tier 1 &bull; Puncak</span>
+                </span>
               </div>
+
               <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">CHEF</h3>
               <p className="text-xs font-black text-[#D97706] dark:text-amber-400 uppercase tracking-wider mb-4">
-                The Masterminds & Founder
+                Petinggi & Founder Server
               </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5 font-semibold">
                 Penjaga ketertiban dan pengarah visi komunitas. Memiliki kontrol penuh atas server, broadcast pengumuman resmi (*Mini CMS*), serta tata kelola server.
               </p>
+
+              {/* Requirement Box */}
+              <div className="bg-amber-50/80 dark:bg-amber-950/30 border-2 border-amber-200 dark:border-amber-900/60 rounded-xl p-3 mb-5">
+                <div className="text-[10px] font-black uppercase text-[#D97706] dark:text-amber-400 tracking-wider">
+                  Cara Memperoleh
+                </div>
+                <div className="text-xs font-bold text-[#0A1128] dark:text-slate-200 mt-0.5">
+                  Founder & Penunjukan Khusus Pengurus
+                </div>
+              </div>
             </div>
 
-            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
+            {/* Privileges & Hak Akses */}
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-4 space-y-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+              <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-2">
+                Hak Akses & Privilege
+              </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#F59E0B] shrink-0" />
                 <span>Publish & Pin Pengumuman Resmi (CMS)</span>
@@ -396,26 +414,43 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* SIRKEL CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#E31B23] dark:shadow-[7px_7px_0px_#E31B23] flex flex-col justify-between relative overflow-hidden ring-3 ring-[#E31B23]">
-            <div className="absolute top-0 right-0 bg-[#E31B23] text-white font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
-              Tier 2 Inti
-            </div>
-
+          {/* SIRKEL CARD (TIER 2 - RED) */}
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-7 shadow-[7px_7px_0px_#E31B23] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
             <div>
-              <div className="w-16 h-16 bg-red-50 dark:bg-red-950/40 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
-                <Flame className="w-8 h-8 text-[#E31B23] dark:text-red-400" />
+              {/* Header with Icon & Integrated Tier Badge */}
+              <div className="flex items-center justify-between gap-3 mb-5">
+                <div className="w-14 h-14 bg-red-50 dark:bg-red-950/60 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] shrink-0">
+                  <Flame className="w-7 h-7 text-[#E31B23] dark:text-red-400" />
+                </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 dark:bg-rose-950/60 text-[#E31B23] dark:text-rose-300 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-[11px] font-black uppercase tracking-wider shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+                  <span>Tier 2 &bull; Inti</span>
+                </span>
               </div>
+
               <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">SIRKEL</h3>
               <p className="text-xs font-black text-[#E31B23] dark:text-red-400 uppercase tracking-wider mb-4">
-                The Homies & Mabar Host
+                Warga Inti & Host Mabar
               </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5 font-semibold">
                 Member reguler aktif dan inisiator keseruan. Mereka yang sering ngajak nongkrong, meramaikan voice channel, dan mengabadikan momen seru di galeri.
               </p>
+
+              {/* Requirement Box */}
+              <div className="bg-red-50/80 dark:bg-red-950/30 border-2 border-red-200 dark:border-red-900/60 rounded-xl p-3 mb-5">
+                <div className="text-[10px] font-black uppercase text-[#E31B23] dark:text-red-400 tracking-wider">
+                  Cara Memperoleh
+                </div>
+                <div className="text-xs font-bold text-[#0A1128] dark:text-slate-200 mt-0.5">
+                  Aktif di Voice Room & kontribusi momen di Galeri
+                </div>
+              </div>
             </div>
 
-            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
+            {/* Privileges & Hak Akses */}
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-4 space-y-2 text-xs font-black text-slate-700 dark:text-slate-300">
+              <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-2">
+                Hak Akses & Privilege
+              </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-[#E31B23] shrink-0" />
                 <span>Ajak Mabar di Discord & Unggah Momen</span>
@@ -427,26 +462,43 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* MALAZZ CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-slate-200 dark:bg-slate-800 text-[#0A1128] dark:text-slate-200 font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
-              Tier 3 Umum
-            </div>
-
+          {/* MALAZZ CARD (TIER 3 - NAVY/SLATE) */}
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
             <div>
-              <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 border-3 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center mb-6 shadow-[4px_4px_0px_#0A1128] dark:shadow-[4px_4px_0px_#000000]">
-                <Coffee className="w-8 h-8 text-[#64748B] dark:text-slate-400" />
+              {/* Header with Icon & Integrated Tier Badge */}
+              <div className="flex items-center justify-between gap-3 mb-5">
+                <div className="w-14 h-14 bg-slate-100 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000] shrink-0">
+                  <Coffee className="w-7 h-7 text-[#64748B] dark:text-slate-400" />
+                </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl text-[11px] font-black uppercase tracking-wider shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+                  <span>Tier 3 &bull; Umum</span>
+                </span>
               </div>
+
               <h3 className="text-3xl font-black text-[#0A1128] dark:text-white mb-1">MALAZZ</h3>
               <p className="text-xs font-black text-[#64748B] dark:text-slate-400 uppercase tracking-wider mb-4">
-                The Chillers & Enjoyers
+                Warga Santai & Penikmat
               </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 font-semibold">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-5 font-semibold">
                 Basis massa santai. Bebas mampir kapan saja, membaca pengumuman publik, ikutan nimbrung ngobrol di voice channel, dan meramaikan galeri.
               </p>
+
+              {/* Requirement Box */}
+              <div className="bg-slate-100/80 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-xl p-3 mb-5">
+                <div className="text-[10px] font-black uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+                  Cara Memperoleh
+                </div>
+                <div className="text-xs font-bold text-[#0A1128] dark:text-slate-200 mt-0.5">
+                  Otomatis didapatkan saat pertama kali join Discord
+                </div>
+              </div>
             </div>
 
-            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-5 space-y-2.5 text-xs font-black text-slate-700 dark:text-slate-300">
+            {/* Privileges & Hak Akses */}
+            <div className="border-t-2 border-slate-100 dark:border-slate-800 pt-4 space-y-2 text-xs font-black text-slate-700 dark:text-slate-300">
+              <div className="text-[10px] font-black uppercase text-slate-400 dark:text-slate-500 tracking-wider mb-2">
+                Hak Akses & Privilege
+              </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4 h-4 text-slate-500 shrink-0" />
                 <span>Akses Publik Semua Halaman Portal</span>
