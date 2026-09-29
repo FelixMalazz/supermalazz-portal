@@ -108,14 +108,14 @@ export default async function HomePage() {
           
           {/* Logo Showcase with Badge */}
           <div className="flex flex-col items-center justify-center gap-3 mb-6">
-            <div className="relative group">
+            <div className="relative">
               {/* Outer decorative neo shadow box */}
-              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 p-3 shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-[4px_4px_0px_#0A1128] dark:group-hover:shadow-[4px_4px_0px_#000000] transition-all overflow-hidden flex items-center justify-center">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 p-3 shadow-[8px_8px_0px_#0A1128] dark:shadow-[8px_8px_0px_#000000] overflow-hidden flex items-center justify-center">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/logo.png"
                   alt="SuperMalazz Official Logo"
-                  className="w-full h-full object-contain drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain drop-shadow-sm"
                 />
               </div>
 
@@ -146,7 +146,7 @@ export default async function HomePage() {
           {/* Headline Utama */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#0A1128] dark:text-white tracking-tight leading-[1.08]">
             Bukan Sekadar Discord, Ini{' '}
-            <span className="inline-block bg-[#E31B23] text-white px-4 py-0.5 rounded-2xl border-3 border-[#0A1128] dark:border-slate-700 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] -rotate-1 hover:rotate-0 transition-transform">
+            <span className="inline-block bg-[#E31B23] text-white px-4 py-0.5 rounded-2xl border-3 border-[#0A1128] dark:border-slate-700 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] -rotate-1">
               Rumah Kedua
             </span>{' '}
             Lo.
@@ -218,7 +218,7 @@ export default async function HomePage() {
               {voiceMembers.slice(0, 10).map((vm) => (
                 <div
                   key={vm.id}
-                  className="flex items-center gap-2.5 px-3.5 py-2 bg-slate-800/95 border-2 border-slate-700 rounded-xl hover:border-emerald-400 transition-colors"
+                  className="flex items-center gap-2.5 px-3.5 py-2 bg-slate-800/95 border-2 border-slate-700 rounded-xl"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -366,7 +366,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* CHEF CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#F59E0B] transition-all flex flex-col justify-between relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-[#F59E0B] text-[#0A1128] font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 1 Puncak
             </div>
@@ -397,7 +397,7 @@ export default async function HomePage() {
           </div>
 
           {/* SIRKEL CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#E31B23] dark:shadow-[7px_7px_0px_#E31B23] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#E31B23] transition-all flex flex-col justify-between relative overflow-hidden ring-3 ring-[#E31B23]">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#E31B23] dark:shadow-[7px_7px_0px_#E31B23] flex flex-col justify-between relative overflow-hidden ring-3 ring-[#E31B23]">
             <div className="absolute top-0 right-0 bg-[#E31B23] text-white font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 2 Inti
             </div>
@@ -428,7 +428,7 @@ export default async function HomePage() {
           </div>
 
           {/* MALAZZ CARD */}
-          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] hover:-translate-y-1 hover:shadow-[9px_9px_0px_#64748B] transition-all flex flex-col justify-between relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-7 shadow-[7px_7px_0px_#0A1128] dark:shadow-[7px_7px_0px_#000000] flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-slate-200 dark:bg-slate-800 text-[#0A1128] dark:text-slate-200 font-black text-[11px] uppercase px-4 py-1.5 border-b-2 border-l-2 border-[#0A1128] dark:border-slate-700 rounded-bl-2xl tracking-wider shadow-sm">
               Tier 3 Umum
             </div>
@@ -480,11 +480,11 @@ export default async function HomePage() {
           {COMMUNITY_RULES.map((rule) => (
             <div
               key={rule.no}
-              className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] hover:-translate-y-1 hover:shadow-[7px_7px_0px_#E31B23] dark:hover:shadow-[7px_7px_0px_#E31B23] transition-all flex flex-col justify-between group"
+              className="bg-white dark:bg-slate-900 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 shadow-[5px_5px_0px_#0A1128] dark:shadow-[5px_5px_0px_#000000] flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-red-50 dark:bg-red-950/40 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center font-black text-base text-[#E31B23] dark:text-red-400 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] group-hover:bg-[#E31B23] group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 bg-red-50 dark:bg-red-950/40 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl flex items-center justify-center font-black text-base text-[#E31B23] dark:text-red-400 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
                     {rule.no}
                   </div>
                   <span className={`px-2.5 py-1 border border-[#0A1128] dark:border-slate-700 rounded-lg text-[10px] font-black uppercase tracking-wider ${rule.badgeClass} dark:bg-slate-800 dark:text-slate-200`}>
@@ -492,7 +492,7 @@ export default async function HomePage() {
                   </span>
                 </div>
 
-                <h3 className="font-black text-lg text-[#0A1128] dark:text-white mb-2 leading-snug group-hover:text-[#E31B23] dark:group-hover:text-red-400 transition-colors">
+                <h3 className="font-black text-lg text-[#0A1128] dark:text-white mb-2 leading-snug">
                   {rule.title}
                 </h3>
 
