@@ -12,8 +12,7 @@ import {
   Camera,
   Heart,
   Volume2,
-  ShieldAlert,
-  Trophy
+  ShieldAlert
 } from 'lucide-react';
 import { getAnnouncements } from '@/lib/data';
 import { getCurrentUser } from '@/lib/auth';
@@ -283,34 +282,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
-      {/* LEADERBOARD NOCTALY SPOTLIGHT BANNER */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 mb-16">
-        <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 border-3 border-[#0A1128] dark:border-slate-700 rounded-3xl p-6 sm:p-8 shadow-[6px_6px_0px_#0A1128] dark:shadow-[6px_6px_0px_#000000] text-white flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
-          <div className="space-y-2 max-w-xl z-10">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/20 backdrop-blur-md rounded-xl text-xs font-black uppercase tracking-wider border border-white/30">
-              <Trophy className="w-3.5 h-3.5 text-amber-200" />
-              <span>Noctaly Leaderboard Server</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
-              Siapa Warga Paling Aktif di SuperMalazz?
-            </h3>
-            <p className="text-xs sm:text-sm text-amber-100 font-semibold leading-relaxed">
-              Kumpulkan Chat & Voice XP dari obrolan harian dan mabar di Discord. Cek posisi Top 100 ranking kamu sekarang!
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3 z-10 shrink-0">
-            <Link
-              href="/leaderboard"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white text-[#0A1128] font-black text-xs uppercase tracking-wider rounded-xl border-2 border-[#0A1128] shadow-[3px_3px_0px_#0A1128] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] transition-all"
-            >
-              <span>Buka Leaderboard</span>
-              <ArrowRight className="w-4 h-4 text-[#E31B23]" />
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* 4. GALERI & MOMEN HIGHLIGHT */}
       {topMoments.length > 0 && (

@@ -14,8 +14,7 @@ import {
   Camera, 
   Menu, 
   X,
-  Home,
-  Trophy
+  Home
 } from 'lucide-react';
 import { UserSession } from '@/lib/types';
 import ThemeToggle from './ThemeToggle';
@@ -67,7 +66,6 @@ export default function Navbar({ user, onlineCount = 76 }: NavbarProps) {
 
   const navLinks = [
     { href: '/', label: 'Beranda', icon: Home },
-    { href: '/leaderboard', label: 'Leaderboard', icon: Trophy },
     { href: '/galeri', label: 'Galeri Momen', icon: Camera },
     { href: '/members', label: 'Warga Live', icon: Radio, badge: `${onlineCount}` },
     { href: '/pengumuman', label: 'Pengumuman', icon: Megaphone },
