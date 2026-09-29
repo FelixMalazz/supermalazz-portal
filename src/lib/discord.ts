@@ -1,3 +1,5 @@
+import type { UserRole } from './types';
+
 export interface DiscordWidgetMember {
   id: string;
   username: string;
@@ -35,8 +37,19 @@ export interface DiscordWidgetData {
   presence_count: number;
 }
 
+export const DISCORD_GUILD_ID = process.env.DISCORD_GUILD_ID || '976042783443943464';
+const CHEF_ROLE_ID = process.env.DISCORD_ROLE_CHEF_ID || '1146093007729348629';
+const SIRKEL_ROLE_ID = process.env.DISCORD_ROLE_SIRKEL_ID || '1030705472120041473';
+
+/** Single place where Discord role IDs become SuperMalazz roles. */
+export function roleFromDiscordRoleIds(roles: string[]): UserRole {
+  if (roles.includes(CHEF_ROLE_ID)) return 'CHEF';
+  if (roles.includes(SIRKEL_ROLE_ID)) return 'SIRKEL';
+  return 'MALAZZ';
+}
+
 export async function getDiscordWidget(): Promise<DiscordWidgetData | null> {
-  const guildId = process.env.DISCORD_GUILD_ID || '976042783443943464';
+  const guildId = DISCORD_GUILD_ID;
 
   try {
     const res = await fetch(`https://discord.com/api/guilds/${guildId}/widget.json`, {
@@ -64,7 +77,7 @@ export async function getAllGuildMembers(): Promise<{
   channels: DiscordWidgetChannel[];
   instant_invite: string;
 }> {
-  const guildId = process.env.DISCORD_GUILD_ID || '976042783443943464';
+  const guildId = DISCORD_GUILD_ID;
   const botToken = process.env.DISCORD_BOT_TOKEN;
 
   // 1. Fetch live widget data (presence, voice channels, games)
@@ -144,9 +157,6 @@ export async function getAllGuildMembers(): Promise<{
       return undefined;
     };
 
-    const chefRoleId = process.env.DISCORD_ROLE_CHEF_ID || '1146093007729348629';
-    const sirkelRoleId = process.env.DISCORD_ROLE_SIRKEL_ID || '1030705472120041473';
-
     // Map all members
     const allMembers: DiscordWidgetMember[] = botMembers
       .filter((bm) => !bm.user?.bot) // Filter out bots so only genuine human members are shown
@@ -172,13 +182,7 @@ export async function getAllGuildMembers(): Promise<{
         }
 
         // Determine role from Discord role IDs
-        let role = 'MALAZZ';
-        const userRoles: string[] = bm.roles || [];
-        if (userRoles.includes(chefRoleId)) {
-          role = 'CHEF';
-        } else if (userRoles.includes(sirkelRoleId)) {
-          role = 'SIRKEL';
-        }
+        const role = roleFromDiscordRoleIds(bm.roles || []);
 
         return {
           id: u.id,
@@ -245,5 +249,37 @@ export async function getAllGuildMembers(): Promise<{
       channels,
       instant_invite,
     };
+  }
+}
+
+/**
+ * Read one member's SuperMalazz role straight from Discord (source of truth for RBAC).
+ * Returns null when the answer is unknown: no bot token, Discord unreachable or rate limited,
+ * or a 404 (member not in guild, but also a wrong DISCORD_GUILD_ID). Callers must keep their
+ * cached role on null instead of downgrading, or one bad config would strip every CHEF.
+ */
+export async function fetchDiscordRole(discordUserId: string): Promise<UserRole | null> {
+  const botToken = process.env.DISCORD_BOT_TOKEN;
+  if (!botToken) return null;
+
+  try {
+    const res = await fetch(
+      `https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/members/${discordUserId}`,
+      {
+        headers: { Authorization: `Bot ${botToken}` },
+        cache: 'no-store',
+      }
+    );
+
+    if (!res.ok) {
+      console.error(`Discord role fetch failed for ${discordUserId}: ${res.status}`);
+      return null;
+    }
+
+    const member = await res.json();
+    return roleFromDiscordRoleIds(member.roles || []);
+  } catch (error) {
+    console.error(`Discord role fetch error for ${discordUserId}:`, error);
+    return null;
   }
 }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { DISCORD_GUILD_ID, roleFromDiscordRoleIds } from '@/lib/discord';
 import { UserRole } from '@/lib/types';
 import { signSession } from '@/lib/session';
 
@@ -62,12 +63,13 @@ export async function GET(request: NextRequest) {
       : `https://cdn.discordapp.com/embed/avatars/${Number(discordUser.id.slice(-1)) % 5}.png`;
 
     // 3. Fetch Guild member to map roles (CHEF, SIRKEL, MALAZZ)
-    const guildId = process.env.DISCORD_GUILD_ID || '976042783443943464';
-    const chefRoleId = process.env.DISCORD_ROLE_CHEF_ID || '1146093007729348629';
-    const sirkelRoleId = process.env.DISCORD_ROLE_SIRKEL_ID || '1030705472120041473';
+    const guildId = DISCORD_GUILD_ID;
 
     let assignedRole: UserRole = 'MALAZZ';
     let joinedGuildAt: Date | null = null;
+    // Only a definitive Discord answer may overwrite the stored role. A network blip or a 5xx
+    // must not demote a real CHEF, so unresolved reads keep whatever PostgreSQL already has.
+    let rolesResolved = false;
 
     try {
       const memberResponse = await fetch(`https://discord.com/api/users/@me/guilds/${guildId}/member`, {
@@ -76,37 +78,34 @@ export async function GET(request: NextRequest) {
 
       if (memberResponse.ok) {
         const memberData = await memberResponse.json();
-        const roles: string[] = memberData.roles || [];
 
-        if (roles.includes(chefRoleId)) {
-          assignedRole = 'CHEF';
-        } else if (roles.includes(sirkelRoleId)) {
-          assignedRole = 'SIRKEL';
-        } else {
-          assignedRole = 'MALAZZ';
-        }
+        assignedRole = roleFromDiscordRoleIds(memberData.roles || []);
 
         if (memberData.joined_at) {
           joinedGuildAt = new Date(memberData.joined_at);
         }
-      } else {
-        // User not in guild, defaults to MALAZZ as per policy
+
+        rolesResolved = true;
+      } else if (memberResponse.status === 404) {
+        // Definitive: user is not in the guild, so MALAZZ as per policy
         assignedRole = 'MALAZZ';
+        rolesResolved = true;
+      } else {
+        console.warn(`Guild member fetch returned ${memberResponse.status}, keeping stored role`);
       }
     } catch (err) {
-      console.warn('Could not fetch guild member, defaulting to MALAZZ:', err);
-      assignedRole = 'MALAZZ';
+      console.warn('Could not fetch guild member, keeping stored role:', err);
     }
 
     // 4. Upsert user into PostgreSQL database
     try {
-      await prisma.user.upsert({
+      const saved = await prisma.user.upsert({
         where: { id: discordUser.id },
         update: {
           username: discordUser.username,
           displayName: discordUser.global_name || discordUser.username,
           avatar: avatarUrl,
-          role: assignedRole,
+          ...(rolesResolved ? { role: assignedRole } : {}),
           joinedGuildAt,
         },
         create: {
@@ -118,6 +117,9 @@ export async function GET(request: NextRequest) {
           joinedGuildAt,
         },
       });
+
+      // Session always mirrors the stored role, never the raw Discord read
+      assignedRole = saved.role;
     } catch (dbErr) {
       console.error('Failed to upsert user in DB:', dbErr);
     }
