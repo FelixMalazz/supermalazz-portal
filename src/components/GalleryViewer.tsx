@@ -19,7 +19,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { MomentItem } from '@/lib/gallery';
-import { UserSession } from '@/lib/types';
+import { UserSession, ReactionGroup } from '@/lib/types';
 import { showToast } from '@/components/Toast';
 import ReactionPicker from './ReactionPicker';
 import CommentSection from './CommentSection';
@@ -36,7 +36,8 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState<'NEWEST' | 'OLDEST' | 'MOST_LIKED'>('NEWEST');
   const [selectedMoment, setSelectedMoment] = useState<MomentItem | null>(null);
-  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
+
+  const isChef = currentUser?.role === 'CHEF';
 
   // Sync state whenever initialMoments prop updates (e.g. from router.refresh)
   useEffect(() => {
@@ -63,19 +64,75 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
   const [deletingMoment, setDeletingMoment] = useState<MomentItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleLike = (id: string, e: React.MouseEvent) => {
+  // Synchronized Like ❤️ connected directly to database reactions
+  const handleLike = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (likedIds.has(id)) return;
+    if (!currentUser) {
+      showToast('⚠️ Silakan Login Discord untuk memberikan like/reaksi!', 'warning');
+      return;
+    }
 
-    setLikedIds((prev) => new Set(prev).add(id));
+    const targetMoment = moments.find((m) => m.id === id);
+    if (!targetMoment) return;
+
+    const heartGroup = targetMoment.reactions?.find((r) => r.emoji === '❤️');
+    const hasHearted = heartGroup?.userIds.includes(currentUser.id) ?? false;
+
+    // Optimistic reaction toggle
+    let updatedReactions: ReactionGroup[];
+    if (heartGroup) {
+      if (hasHearted) {
+        const nextUserIds = heartGroup.userIds.filter((uid) => uid !== currentUser.id);
+        if (nextUserIds.length === 0) {
+          updatedReactions = (targetMoment.reactions || []).filter((r) => r.emoji !== '❤️');
+        } else {
+          updatedReactions = (targetMoment.reactions || []).map((r) =>
+            r.emoji === '❤️' ? { ...r, count: nextUserIds.length, userIds: nextUserIds } : r
+          );
+        }
+      } else {
+        const nextUserIds = [...heartGroup.userIds, currentUser.id];
+        updatedReactions = (targetMoment.reactions || []).map((r) =>
+          r.emoji === '❤️' ? { ...r, count: nextUserIds.length, userIds: nextUserIds } : r
+        );
+      }
+    } else {
+      updatedReactions = [...(targetMoment.reactions || []), { emoji: '❤️', count: 1, userIds: [currentUser.id] }];
+    }
+
     setMoments((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, likes: m.likes + 1 } : m))
+      prev.map((m) => (m.id === id ? { ...m, reactions: updatedReactions } : m))
     );
-    showToast('❤️ Menyukai foto momen tongkrongan!');
+    if (selectedMoment?.id === id) {
+      setSelectedMoment((prev) => (prev ? { ...prev, reactions: updatedReactions } : null));
+    }
+
+    showToast(hasHearted ? 'Batal menyukai foto momen.' : '❤️ Menyukai foto momen tongkrongan!');
+
+    try {
+      const res = await fetch(`/api/moments/${id}/reactions`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ emoji: '❤️' }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.reactions) {
+          setMoments((prev) =>
+            prev.map((m) => (m.id === id ? { ...m, reactions: data.reactions } : m))
+          );
+          if (selectedMoment?.id === id) {
+            setSelectedMoment((prev) => (prev ? { ...prev, reactions: data.reactions } : null));
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Like toggle error:', err);
+    }
   };
 
   const handleConfirmDelete = async () => {
-    if (!deletingMoment) return;
+    if (!deletingMoment || !isChef) return;
     setIsDeleting(true);
 
     try {
@@ -90,7 +147,7 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
         setSelectedMoment(null);
       }
       setDeletingMoment(null);
-      showToast('Foto momen berhasil dihapus', 'info');
+      showToast('Foto momen berhasil dihapus permanen oleh Chef', 'info');
     } catch (err) {
       alert('Gagal menghapus momen.');
     } finally {
@@ -289,7 +346,6 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredMoments.map((item) => {
-            const isLiked = likedIds.has(item.id);
 
             return (
               <div
@@ -374,44 +430,55 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                     </span>
                   </div>
 
-                  {/* Actions: Like, Comment count & Delete */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => handleLike(item.id, e)}
-                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border-2 font-black transition-all cursor-pointer ${
-                        isLiked
-                          ? 'bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-[#E31B23] shadow-[1px_1px_0px_#E31B23]'
-                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-[#0A1128] dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
-                      }`}
-                    >
-                      <Heart
-                        className={`w-3.5 h-3.5 ${isLiked ? 'fill-[#E31B23] text-[#E31B23]' : 'text-slate-500 dark:text-slate-400'}`}
-                      />
-                      <span>{item.likes}</span>
-                    </button>
+                  {/* Actions: Synced Like, Comment count & CHEF Delete */}
+                  {(() => {
+                    const heartGroup = item.reactions?.find((r) => r.emoji === '❤️');
+                    const heartCount = heartGroup ? heartGroup.count : item.likes;
+                    const hasHearted = Boolean(currentUser && heartGroup?.userIds.includes(currentUser.id));
 
-                    {/* Comment Count indicator */}
-                    <div
-                      title={`${item.comments?.length || 0} Komentar`}
-                      className="flex items-center gap-1 px-2 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-black shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
-                      <span>{item.comments?.length || 0}</span>
-                    </div>
+                    return (
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => handleLike(item.id, e)}
+                          title={hasHearted ? 'Batal Menyukai' : 'Suka Foto Momen'}
+                          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border-2 font-black transition-all cursor-pointer ${
+                            hasHearted
+                              ? 'bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-[#E31B23] shadow-[1px_1px_0px_#E31B23]'
+                              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-[#0A1128] dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700'
+                          }`}
+                        >
+                          <Heart
+                            className={`w-3.5 h-3.5 ${hasHearted ? 'fill-[#E31B23] text-[#E31B23]' : 'text-slate-500 dark:text-slate-400'}`}
+                          />
+                          <span>{heartCount}</span>
+                        </button>
 
-                    {/* Delete Button */}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setDeletingMoment(item);
-                      }}
-                      title="Hapus Momen Ini"
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 font-black text-xs shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all cursor-pointer"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Hapus</span>
-                    </button>
-                  </div>
+                        {/* Comment Count indicator */}
+                        <div
+                          title={`${item.comments?.length || 0} Komentar`}
+                          className="flex items-center gap-1 px-2 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-black shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
+                          <span>{item.comments?.length || 0}</span>
+                        </div>
+
+                        {/* Delete Button (CHEF only) */}
+                        {isChef && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDeletingMoment(item);
+                            }}
+                            title="Hapus Momen Ini (Khusus Chef)"
+                            className="flex items-center gap-1 px-2.5 py-1 rounded-lg border-2 border-[#0A1128] dark:border-slate-700 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 font-black text-xs shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] dark:hover:shadow-[1px_1px_0px_#000000] transition-all cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span className="hidden sm:inline">Hapus</span>
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })()}
 
                 </div>
               </div>
@@ -494,24 +561,38 @@ export default function GalleryViewer({ initialMoments, currentUser }: GalleryVi
                 )}
               </div>
 
-              {/* Action Buttons: Like & Delete */}
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  onClick={() => setDeletingMoment(selectedMoment)}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  <span>Hapus Momen</span>
-                </button>
+              {/* Action Buttons: Synced Like & CHEF Delete */}
+              {(() => {
+                const selectedHeartGroup = selectedMoment.reactions?.find((r) => r.emoji === '❤️');
+                const selectedHeartCount = selectedHeartGroup ? selectedHeartGroup.count : selectedMoment.likes;
+                const selectedHasHearted = Boolean(currentUser && selectedHeartGroup?.userIds.includes(currentUser.id));
 
-                <button
-                  onClick={(e) => handleLike(selectedMoment.id, e)}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
-                >
-                  <Heart className="w-4 h-4 fill-[#E31B23] dark:fill-red-400" />
-                  <span>Suka Momen Ini ({selectedMoment.likes})</span>
-                </button>
-              </div>
+                return (
+                  <div className="flex items-center justify-between pt-2">
+                    {isChef ? (
+                      <button
+                        onClick={() => setDeletingMoment(selectedMoment)}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/50 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        <span>Hapus Momen (Chef)</span>
+                      </button>
+                    ) : <div />}
+
+                    <button
+                      onClick={(e) => handleLike(selectedMoment.id, e)}
+                      className={`inline-flex items-center gap-2 px-4 py-2 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl font-black text-xs uppercase shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer ${
+                        selectedHasHearted
+                          ? 'bg-red-50 dark:bg-red-950/40 text-[#E31B23] dark:text-red-400 border-[#E31B23]'
+                          : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200'
+                      }`}
+                    >
+                      <Heart className={`w-4 h-4 ${selectedHasHearted ? 'fill-[#E31B23] text-[#E31B23]' : 'text-slate-400'}`} />
+                      <span>{selectedHasHearted ? 'Disukai' : 'Suka Momen Ini'} ({selectedHeartCount})</span>
+                    </button>
+                  </div>
+                );
+              })()}
 
               {/* Reaction Bar */}
               <div className="p-3 bg-slate-50 dark:bg-slate-800/80 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl space-y-2 shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">

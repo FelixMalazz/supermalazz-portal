@@ -204,7 +204,7 @@ export default function AnnouncementFeedClient({
 
   // Delete Action
   const handleConfirmDelete = async () => {
-    if (!deletingItem || !isChef) return;
+    if (!deletingItem || (!isChef && currentUser?.id !== deletingItem.authorId)) return;
     setIsDeleting(true);
 
     try {
@@ -407,34 +407,36 @@ export default function AnnouncementFeedClient({
                     )}
                   </div>
 
-                  {/* Right Actions: CHEF Management Controls (Opsi 1) */}
-                  {isChef && (
+                  {/* Right Actions: Pin for CHEF, Edit/Delete for Author or CHEF */}
+                  {(isChef || (currentUser && currentUser.id === item.authorId)) && (
                     <div className="flex items-center gap-2">
-                      {/* Quick Pin/Unpin Toggle Button */}
-                      <button
-                        onClick={() => handleTogglePin(item)}
-                        disabled={pinningId === item.id}
-                        title={item.isPinned ? 'Lepas Sematan (Unpin)' : 'Sematkan ke Atas (Pin)'}
-                        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-black border-2 border-[#0A1128] dark:border-slate-700 transition-all cursor-pointer shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] ${
-                          item.isPinned
-                            ? 'bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 hover:bg-[#fde68a] dark:hover:bg-amber-900/70'
-                            : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
-                        }`}
-                      >
-                        {item.isPinned ? (
-                          <>
-                            <PinOff className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Lepas Pin</span>
-                          </>
-                        ) : (
-                          <>
-                            <Pin className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Sematkan</span>
-                          </>
-                        )}
-                      </button>
+                      {/* Quick Pin/Unpin Toggle Button (CHEF only) */}
+                      {isChef && (
+                        <button
+                          onClick={() => handleTogglePin(item)}
+                          disabled={pinningId === item.id}
+                          title={item.isPinned ? 'Lepas Sematan (Unpin)' : 'Sematkan ke Atas (Pin)'}
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-black border-2 border-[#0A1128] dark:border-slate-700 transition-all cursor-pointer shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0px_#0A1128] ${
+                            item.isPinned
+                              ? 'bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 hover:bg-[#fde68a] dark:hover:bg-amber-900/70'
+                              : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
+                          }`}
+                        >
+                          {item.isPinned ? (
+                            <>
+                              <PinOff className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">Lepas Pin</span>
+                            </>
+                          ) : (
+                            <>
+                              <Pin className="w-3.5 h-3.5" />
+                              <span className="hidden sm:inline">Sematkan</span>
+                            </>
+                          )}
+                        </button>
+                      )}
 
-                      {/* Edit Button */}
+                      {/* Edit Button (Author or CHEF) */}
                       <button
                         onClick={() => handleOpenEdit(item)}
                         title="Edit Pengumuman"
@@ -444,7 +446,7 @@ export default function AnnouncementFeedClient({
                         <span className="hidden sm:inline">Edit</span>
                       </button>
 
-                      {/* Delete Button */}
+                      {/* Delete Button (Author or CHEF) */}
                       <button
                         onClick={() => setDeletingItem(item)}
                         title="Hapus Pengumuman"

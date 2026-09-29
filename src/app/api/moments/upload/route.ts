@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs/promises';
+import sharp from 'sharp';
 import { put } from '@vercel/blob';
 import { getCurrentUser } from '@/lib/auth';
 import { createMoment } from '@/lib/gallery';
@@ -73,36 +74,49 @@ export async function POST(request: NextRequest) {
       // Clean file extension & name
       const ext = path.extname(file.name).toLowerCase() || '.jpg';
       const cleanBase = path.basename(file.name, ext).replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 40);
-      const uniqueFilename = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${cleanBase}${ext}`;
+
+      // Read file buffer
+      const originalBytes = await file.arrayBuffer();
+      const originalBuffer = Buffer.from(originalBytes);
+
+      // Automatically optimize & compress image using Sharp (max 1200x1200px, WebP quality 80)
+      let finalBuffer = originalBuffer;
+      let finalMime = file.type || 'image/jpeg';
+      let finalExt = ext;
+
+      try {
+        finalBuffer = await sharp(originalBuffer)
+          .resize({ width: 1200, height: 1200, fit: 'inside', withoutEnlargement: true })
+          .webp({ quality: 80 })
+          .toBuffer();
+        finalMime = 'image/webp';
+        finalExt = '.webp';
+      } catch (sharpErr) {
+        console.warn('Sharp optimization skipped, using original buffer:', sharpErr);
+      }
+
+      const uniqueFilename = `${Date.now()}_${Math.random().toString(36).substring(2, 7)}_${cleanBase}${finalExt}`;
 
       let imageUrl = '';
       if (hasBlobToken) {
-        // 1. Upload to Vercel Blob cloud storage
-        const blob = await put(`moments/${uniqueFilename}`, file, {
+        // 1. Upload compressed buffer to Vercel Blob cloud storage
+        const blob = await put(`moments/${uniqueFilename}`, finalBuffer, {
           access: 'public',
+          contentType: finalMime,
         });
         imageUrl = blob.url;
       } else if (isServerless) {
-        // 2. Serverless fallback (Vercel read-only filesystem): encode to Base64 Data URI
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const mimeType = file.type || 'image/jpeg';
-        imageUrl = `data:${mimeType};base64,${buffer.toString('base64')}`;
+        // 2. Serverless fallback: encode compressed WebP buffer to Base64 Data URI (<100KB)
+        imageUrl = `data:${finalMime};base64,${finalBuffer.toString('base64')}`;
       } else {
-        // 3. Local development: Write file buffer to local disk
+        // 3. Local development: Write compressed buffer to local disk
         try {
           const filePath = path.join(uploadDir, uniqueFilename);
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          await fs.writeFile(filePath, buffer);
+          await fs.writeFile(filePath, finalBuffer);
           imageUrl = `/uploads/moments/${uniqueFilename}`;
         } catch (diskErr) {
-          // If local disk write fails for any reason, fallback to data URI
           console.warn('Local disk write failed, falling back to base64:', diskErr);
-          const bytes = await file.arrayBuffer();
-          const buffer = Buffer.from(bytes);
-          const mimeType = file.type || 'image/jpeg';
-          imageUrl = `data:${mimeType};base64,${buffer.toString('base64')}`;
+          imageUrl = `data:${finalMime};base64,${finalBuffer.toString('base64')}`;
         }
       }
 

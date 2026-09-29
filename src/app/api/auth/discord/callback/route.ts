@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { UserRole } from '@/lib/types';
+import { signSession } from '@/lib/session';
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -131,20 +132,22 @@ export async function GET(request: NextRequest) {
       isDiscordAuth: true,
     };
 
-    // 6. Set session cookies and redirect
+    // 6. Set cryptographically signed session cookies and redirect
     const response = NextResponse.redirect(`${baseUrl}/?login=success`);
     
-    response.cookies.set('supermalazz_session', JSON.stringify(sessionData), {
+    response.cookies.set('supermalazz_session', signSession(sessionData), {
       path: '/',
-      httpOnly: false,
+      httpOnly: true,
       sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24 * 7, // 7 days
     });
 
     response.cookies.set('supermalazz_role', assignedRole, {
       path: '/',
-      httpOnly: false,
+      httpOnly: false, // Accessible to client-side scripts for UI badges only
       sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24 * 7,
     });
 
