@@ -89,7 +89,7 @@ function PageTransitionLoaderInner() {
 
   if (!isLoading) return null;
 
-  return <LogoLoading message="Memuat Halaman..." subMessage="Tongkrongan SuperMalazz" />;
+  return <LogoLoading />;
 }
 
 export default function PageTransitionLoader() {
