@@ -120,12 +120,12 @@ export default function CommentSection({
   const getRoleBadge = (role: UserRole) => {
     switch (role) {
       case 'CHEF':
-        return 'bg-[#F59E0B] text-[#0A1128] border-[#0A1128]';
+        return 'bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 border-[#0A1128] dark:border-slate-700';
       case 'SIRKEL':
-        return 'bg-purple-600 text-white border-[#0A1128]';
+        return 'bg-red-100 dark:bg-rose-950/60 text-[#E31B23] dark:text-rose-300 border-[#0A1128] dark:border-slate-700';
       case 'MALAZZ':
       default:
-        return 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-600';
+        return 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700';
     }
   };
 

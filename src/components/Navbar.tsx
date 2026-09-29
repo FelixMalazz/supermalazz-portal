@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { 
   Flame, 
   Megaphone, 
-  Users, 
-  Sparkles, 
+  Crown,
+  Coffee,
   Radio, 
   LogIn, 
   LogOut, 
@@ -31,8 +31,8 @@ export default function Navbar({ user, onlineCount = 76 }: NavbarProps) {
   const getRoleBadge = () => {
     if (!user) {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-[#0A1128] dark:border-slate-700 rounded-lg">
-          <span className="w-2 h-2 rounded-full bg-slate-400"></span>
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-[#0A1128] dark:border-slate-700 rounded-lg shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]">
+          <span className="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
           Tamu
         </span>
       );
@@ -41,24 +41,24 @@ export default function Navbar({ user, onlineCount = 76 }: NavbarProps) {
     switch (user.role) {
       case 'CHEF':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-[#F59E0B] text-[#0A1128] border-2 border-[#0A1128] dark:border-slate-900 rounded-lg shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
-            <Sparkles className="w-3.5 h-3.5" />
-            CHEF
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider bg-[#FEF3C7] dark:bg-amber-950/60 text-[#D97706] dark:text-amber-300 border border-[#0A1128] dark:border-slate-700 rounded-lg shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]">
+            <Crown className="w-3 h-3 text-[#D97706] dark:text-amber-400 shrink-0" />
+            <span>CHEF</span>
           </span>
         );
       case 'SIRKEL':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-[#E31B23] text-white border-2 border-[#0A1128] dark:border-slate-900 rounded-lg shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
-            <Flame className="w-3.5 h-3.5" />
-            SIRKEL
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider bg-red-100 dark:bg-rose-950/60 text-[#E31B23] dark:text-rose-300 border border-[#0A1128] dark:border-slate-700 rounded-lg shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]">
+            <Flame className="w-3 h-3 text-[#E31B23] dark:text-rose-400 shrink-0" />
+            <span>SIRKEL</span>
           </span>
         );
       case 'MALAZZ':
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-black uppercase tracking-wider bg-slate-200 dark:bg-slate-700 text-[#0A1128] dark:text-slate-200 border-2 border-[#0A1128] dark:border-slate-600 rounded-lg shadow-[1px_1px_0px_#0A1128] dark:shadow-[1px_1px_0px_#000000]">
-            <Users className="w-3.5 h-3.5 text-slate-700 dark:text-slate-300" />
-            MALAZZ
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-[#0A1128] dark:border-slate-700 rounded-lg shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]">
+            <Coffee className="w-3 h-3 text-slate-500 dark:text-slate-400 shrink-0" />
+            <span>MALAZZ</span>
           </span>
         );
     }
@@ -127,36 +127,38 @@ export default function Navbar({ user, onlineCount = 76 }: NavbarProps) {
           </nav>
 
           {/* User Profile & CTA Desktop */}
-          {/* User Profile & CTA Desktop */}
           <div className="hidden sm:flex items-center gap-3">
             <ThemeToggle />
 
             {user ? (
-              <div className="flex items-center gap-2.5 p-1.5 bg-white dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000]">
+              <div className="flex items-center gap-2.5 p-1.5 pl-2 bg-white dark:bg-slate-800/90 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[3px_3px_0px_#0A1128] dark:shadow-[3px_3px_0px_#000000]">
                 {user.avatar ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={user.avatar}
                     alt={user.username}
-                    className="w-8 h-8 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 object-cover"
+                    className="w-9 h-9 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 object-cover shrink-0 shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-black text-xs">
+                  <div className="w-9 h-9 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-black text-xs shrink-0 shadow-[1.5px_1.5px_0px_#0A1128] dark:shadow-[1.5px_1.5px_0px_#000000]">
                     {user.username.slice(0, 2).toUpperCase()}
                   </div>
                 )}
                 
-                <div className="flex flex-col text-left pr-1">
-                  <span className="text-xs font-black text-[#0A1128] dark:text-white leading-tight truncate max-w-[110px]">
+                <div className="flex flex-col text-left justify-center pr-1 min-w-0">
+                  <span className="text-xs font-black text-[#0A1128] dark:text-white leading-tight truncate max-w-[125px]">
                     {user.displayName || user.username}
                   </span>
-                  <div className="mt-0.5">{getRoleBadge()}</div>
+                  <div className="mt-1 flex items-center">{getRoleBadge()}</div>
                 </div>
+
+                <div className="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-0.5 shrink-0" />
 
                 <a
                   href="/api/auth/logout"
-                  className="p-1.5 text-slate-400 hover:text-[#E31B23] hover:bg-red-50 dark:hover:bg-red-950/40 border-2 border-transparent hover:border-[#0A1128] dark:hover:border-slate-700 rounded-xl transition-all"
+                  className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-[#E31B23] dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/50 border border-transparent hover:border-[#0A1128] dark:hover:border-slate-700 rounded-xl transition-all shrink-0"
                   title="Keluar / Logout"
+                  aria-label="Keluar / Logout"
                 >
                   <LogOut className="w-4 h-4" />
                 </a>
@@ -223,26 +225,27 @@ export default function Navbar({ user, onlineCount = 76 }: NavbarProps) {
           {/* User Section Mobile */}
           <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
             {user ? (
-              <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-xl">
-                <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-800 border-2 border-[#0A1128] dark:border-slate-700 rounded-2xl shadow-[2px_2px_0px_#0A1128] dark:shadow-[2px_2px_0px_#000000]">
+                <div className="flex items-center gap-2.5 min-w-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'}
                     alt={user.username}
-                    className="w-8 h-8 rounded-lg border border-[#0A1128] dark:border-slate-700 object-cover"
+                    className="w-9 h-9 rounded-xl border-2 border-[#0A1128] dark:border-slate-700 object-cover shrink-0"
                   />
-                  <div>
-                    <div className="text-xs font-black text-[#0A1128] dark:text-white">
+                  <div className="flex flex-col min-w-0">
+                    <div className="text-xs font-black text-[#0A1128] dark:text-white truncate">
                       {user.displayName || user.username}
                     </div>
-                    <div>{getRoleBadge()}</div>
+                    <div className="mt-1">{getRoleBadge()}</div>
                   </div>
                 </div>
 
                 <a
                   href="/api/auth/logout"
-                  className="p-2 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-950/40 rounded-lg border border-red-300 dark:border-red-900"
+                  className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-[#E31B23] dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-xl border border-slate-200 dark:border-slate-700 transition-all shrink-0"
                   title="Logout"
+                  aria-label="Logout"
                 >
                   <LogOut className="w-4 h-4" />
                 </a>
