@@ -142,3 +142,35 @@ body {
     linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
 }
+
+/* Page Transition Logo Loading Animations */
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 10px rgba(227, 27, 35, 0.35));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 8px 22px rgba(227, 27, 35, 0.65));
+  }
+}
+
+.animate-logo-pulse {
+  animation: logoPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes brutalProgressBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-brutal-progress {
+  animation: brutalProgressBar 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

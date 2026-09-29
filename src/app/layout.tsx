@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
 import ToastContainer from '@/components/Toast';
+import PageTransitionLoader from '@/components/PageTransitionLoader';
 import { getCurrentUser } from '@/lib/auth';
 import { getDiscordWidget } from '@/lib/discord';
 
@@ -59,6 +60,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-[#F8FAFC] dark:bg-[#080D1A] text-[#0A1128] dark:text-[#F1F5F9] font-sans transition-colors duration-200">
+        <PageTransitionLoader />
         <Navbar user={user} onlineCount={onlineCount} />
         <main className="flex-1">{children}</main>
         <Footer />
