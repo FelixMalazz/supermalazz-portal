@@ -10,45 +10,33 @@ export default async function PengumumanPage() {
   const user = await getCurrentUser();
   const { announcements } = await getAnnouncements();
   
-  // Role check: CHEF has pin & delete privileges
+  // Role check: CHEF has pin privileges
   const isChef = user?.role === 'CHEF';
 
   return (
-    <div className="min-h-screen bg-grid-pattern py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-grid-pattern py-10 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-8 border-b-2 border-[#0A1128] mb-8">
-        <div className="flex items-start gap-4">
-          <div className="w-16 h-16 rounded-2xl border-3 border-[#0A1128] overflow-hidden bg-white shadow-[4px_4px_0px_#0A1128] shrink-0 p-1">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo.png"
-              alt="SuperMalazz Logo"
-              className="w-full h-full object-contain"
-            />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-slate-200 dark:border-slate-800 mb-8">
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 dark:bg-amber-950/40 rounded-lg text-xs font-bold text-[#D97706] dark:text-amber-400 uppercase tracking-wider mb-2">
+            <Megaphone className="w-3.5 h-3.5" />
+            <span>Informasi Komunitas</span>
           </div>
-
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FEF3C7] border-2 border-[#0A1128] rounded-lg text-xs font-black text-[#D97706] uppercase tracking-wider mb-2 shadow-[2px_2px_0px_#0A1128]">
-              <Megaphone className="w-3.5 h-3.5" />
-              <span>Official Broadcast</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black text-[#0A1128] tracking-tight">
-              Papan Pengumuman
-            </h1>
-            <p className="text-sm text-slate-600 font-semibold mt-1">
-              Pusat informasi resmi, regulasi komunitas, jadwal turnamen, dan pembaruan server SuperMalazz.
-            </p>
-          </div>
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0A1128] dark:text-white tracking-tight">
+            Papan Pengumuman
+          </h1>
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Pengumuman resmi, jadwal event, dan diskusi terbuka warga SuperMalazz.
+          </p>
         </div>
 
-        {/* User Role Indicator pill */}
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-white border-2 border-[#0A1128] rounded-xl shadow-[3px_3px_0px_#0A1128] text-xs font-bold text-slate-700 self-start sm:self-auto">
-          <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
-          <span>
-            Mode: <strong className="font-black text-[#0A1128]">{user ? `${user.role} (${user.displayName || user.username})` : 'Tamu (Wajib Login untuk Buat)'}</strong>
-          </span>
-        </div>
+        {user && (
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-xs text-slate-600 dark:text-slate-300 self-start sm:self-auto shadow-xs">
+            <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
+            <span>Role: <strong className="font-bold text-slate-900 dark:text-white uppercase">{user.role}</strong></span>
+          </div>
+        )}
       </div>
 
       {/* Main Interactive Feed (Client Component) */}
